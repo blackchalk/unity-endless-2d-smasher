@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item : MonoBehaviour
+{
 
     public int score;
     public bool beenClicked;
@@ -17,35 +18,41 @@ public class Item : MonoBehaviour {
         effectType = gameObject.tag;
     }
     // Use this for initialization
-    void Start () {
-        beenClicked = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //if(gameObject.activeInHierarchy){
-        //    StartCoroutine(restartStatus());
-        //}
-	}
-
-    private void OnMouseDown()
+    void Start()
     {
-		effectManager.currentGameEffect = effectType;
-
-        //if(beenClicked){
-        //    return;
-        //}else{
-            
-			if (gameObject.tag == "normal")
-			{
-				scoreManager.AddScore(score);
-			} 
-        //    beenClicked = true;
-        //}
+        beenClicked = false;
     }
 
-    //IEnumerator restartStatus(){
-    //    beenClicked = false;
-    //    yield return new WaitForSeconds(0.5f);
-    //}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            effectManager.currentGameEffect = effectType;
+            Debug.Log("" + gameObject.tag + " clicked.");
+
+                if (beenClicked)
+                {
+                    return;
+                }
+                else
+                {
+
+                        scoreManager.AddScore(score);
+                        beenClicked = true;
+                }
+            }
+        }
+
+        public IEnumerator restartStatus(){
+            beenClicked = false;
+        Debug.Log("falsified");
+            yield return new WaitForSeconds(0.5f);
+        }
+
 }

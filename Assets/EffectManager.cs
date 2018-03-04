@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class EffectManager : MonoBehaviour
 {
     private ScoreManager scoreManager;
+    private PlayerController playerController;
     public string currentGameEffect;
+    public float lastKnownPlayerMoveSpeed;
+    public float currentSpeedAtIce;
     public int duration = 0;
     public int itemScore = 0;
     public string itemType;
@@ -14,9 +17,11 @@ public class EffectManager : MonoBehaviour
 	public Text scoreText;
 	private bool doublePointMode;
 	private bool spikeProffMode;
+    private bool iceMode;
 
 	private bool powerUpActive;
 	public float powerUpLengthCounter;
+	public float iceLengthCounter;
 
 	private PlatformGenerator platformGenerator;
 
@@ -28,6 +33,7 @@ public class EffectManager : MonoBehaviour
         currentGameEffect = "normal";
         //scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		scoreManager = FindObjectOfType<ScoreManager>();
+        playerController = FindObjectOfType<PlayerController>();
 		//platformGenerator = FindObjectOfType<PlatformGenerator>();
 
 		normalPointPerSecond = scoreManager.pointPerSecond;
@@ -36,7 +42,7 @@ public class EffectManager : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -56,12 +62,23 @@ public class EffectManager : MonoBehaviour
 			    scoreText.GetComponent<Text>().color = Color.white;
 			}
 
+            if(iceMode){
+                scoreText.GetComponent<Text>().color = Color.blue;
+                iceLengthCounter -= Time.deltaTime;
+                if (iceLengthCounter < 0)
+				{
+                    playerController.moveSpeed = lastKnownPlayerMoveSpeed;
+                    this.iceMode = false;
+                    powerUpActive = false;
+				}
+            }
+
             //TODO create invulnerable true
 
 			if (powerUpLengthCounter < 0)
 			{
-				scoreText.GetComponent<Text>().color = Color.white;
-				//platformGenerator.spikeGenerateThreshold = normalSpikeRate;//null
+				scoreText.GetComponent<Text>().color = Color.black;
+                //platformGenerator.spikeGenerateThreshold = normalSpikeRate;//null
 				scoreManager.coinDoublePoints = false;
 				doublePointMode = false;
 				spikeProffMode = false;
@@ -78,10 +95,19 @@ public class EffectManager : MonoBehaviour
         return this.itemType;
     }
 
-	public void ActivePowerUpMode(bool doublePointMode, bool spikeProffMode, float length)
+	public void ActivePowerUpMode(bool doublePointMode, bool iceMode, bool spikeProffMode,float lastKnownPlayerMoveSpeed, float length)
 	{
+        this.lastKnownPlayerMoveSpeed = lastKnownPlayerMoveSpeed;
+        this.currentSpeedAtIce = lastKnownPlayerMoveSpeed;
 		this.doublePointMode = doublePointMode;
 		this.spikeProffMode = spikeProffMode;
+        if(!this.iceMode){
+            this.iceMode = iceMode;
+        }else{
+            iceMode = false;
+        }
+
+        this.iceLengthCounter = length;
 		this.powerUpLengthCounter = length;
 		powerUpActive = true;
 
@@ -95,6 +121,11 @@ public class EffectManager : MonoBehaviour
 					killbox.SetActive(false);
 				}
 			}
+		}
+
+		if (iceMode)
+		{
+            playerController.moveSpeed = currentSpeedAtIce / 2f;
 		}
 	}
 

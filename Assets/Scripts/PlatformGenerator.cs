@@ -53,7 +53,9 @@ public class PlatformGenerator : MonoBehaviour {
             platformSelector = Random.Range(0, platformPools.Length);
 
             distanceBetweenPlatform = Random.Range(platformDistanceBetweenMin, platformDistanceBetweenMax);
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetweenPlatform, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetweenPlatform, 
+                                             transform.position.y, 
+                                             transform.position.z);
 
             heightChange = transform.position.y + Random.Range(-maxHeightChange, maxHeightChange);
             if (heightChange > maxHeight) {
@@ -64,7 +66,9 @@ public class PlatformGenerator : MonoBehaviour {
 
             if (Random.Range(0f, 100f) < powerUpAppearThreshold) {
                 GameObject newPowerUp = powerUpPooler.GetPoolObject();
-                newPowerUp.transform.position = transform.position + new Vector3((platformWidths[platformSelector] / 2) + (distanceBetweenPlatform / 2), Random.Range(powerUpHeight / 2, powerUpHeight), 0f);
+                newPowerUp.transform.position = transform.position + new Vector3((platformWidths[platformSelector] / 2) + (distanceBetweenPlatform / 2), 
+                                                                                 Random.Range(powerUpHeight / 2, 
+                                                                                              powerUpHeight), 0f);
                 newPowerUp.transform.rotation = transform.rotation;
                 newPowerUp.SetActive(true);
             }
@@ -72,10 +76,13 @@ public class PlatformGenerator : MonoBehaviour {
             GameObject newPlatform = platformPools[platformSelector].GetPoolObject();
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
+			//StartCoroutine(resetbeenclickedWhenActiveAgain(newPlatform));//
             newPlatform.SetActive(true);
 
             if (Random.Range(0f, 100f) < diamondsGenerateThreshold) {
-                diamondsGenerator.SpawnDiamonds(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+                diamondsGenerator.SpawnDiamonds(new Vector3(transform.position.x,
+                                                            transform.position.y + 1f,
+                                                            transform.position.z));
             }
 
             if (Random.Range(0f, 100f) < spikeGenerateThreshold) {
@@ -91,5 +98,35 @@ public class PlatformGenerator : MonoBehaviour {
             // Adjust the gap's size. move the platform generator to end of platform.
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), heightChange, transform.position.z);
         }
+    }
+
+    private IEnumerator resetbeenclickedWhenActiveAgain(GameObject newPlatform){
+        List<Item>[] lt = new List<Item>[CountChildren(newPlatform.transform)];
+
+
+  //      if (newPlatform.GetComponentInChildren<Item>() != null)
+		//{
+			for (int i = 0; i < lt.Length; i++)
+			{
+				Item x = (Item)lt.GetValue(i);
+				x.beenClicked = false;
+
+			}
+		//}
+		Debug.Log("coroutinefalse");
+        yield return new WaitForSeconds(0.1f);
+    }
+
+
+    int CountChildren(Transform a)
+    {
+        int childCount = 0;
+        foreach (Transform b in a)
+        {
+            Debug.Log("Child: " + b);
+            childCount++;
+            childCount += CountChildren(b);
+        }
+        return childCount;
     }
 }

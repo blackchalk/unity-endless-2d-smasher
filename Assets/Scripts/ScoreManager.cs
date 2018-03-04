@@ -28,8 +28,8 @@ public class ScoreManager : MonoBehaviour {
             PlayerPrefs.SetFloat("HighScores", highScoreCounts);
         }
 		
-        scoreText.text = "Score: " + Mathf.Round(scoreCounts);
-        highScoreText.text = "High Score: " + Mathf.Round(highScoreCounts);
+        scoreText.text = "Coins: " + Mathf.Round(scoreCounts);
+        //highScoreText.text = "High Score: " + Mathf.Round(highScoreCounts);
         gameScore.text = ""+Mathf.Round(gameScoreCounts);
     }
 

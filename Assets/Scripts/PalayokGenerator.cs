@@ -34,27 +34,39 @@ public Transform platformGenerationPoint;
     public float powerUpAppearThreshold;
     public ObjectPooler powerUpPooler;
 
-    // Use this for initialization
-    void Start() {
-        platformWidths = new float[platformPools.Length];
-        for (int i = 0; i < platformPools.Length; i++) {
-            platformWidths[i] = platformPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
-        }
+	public float bombGenerateThreshold;
+    public ObjectPooler bombPooler;
 
-        minHeight = transform.position.y; // same as PlatformGenerator's Height
+    public GameObject[] PalayokObjects;
+	public float[] palayokWidths;
+    public int palayokSelector;
+
+	// Use this for initialization
+	void Start() {
+		//platformWidths = new float[platformPools.Length];
+		//for (int i = 0; i < platformPools.Length; i++) {
+		//    platformWidths[i] = platformPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
+		//}
+        palayokWidths = new float[PalayokObjects.Length];
+		for (int i = 0; i < PalayokObjects.Length; i++) {
+		    palayokWidths[i] = PalayokObjects[i].GetComponent<BoxCollider2D>().size.x;
+		}
+
+		minHeight = transform.position.y; // same as PlatformGenerator's Height
         maxHeight = maxHeightPoint.position.y;
 
-        diamondsGenerator = FindObjectOfType<DiamondsGenerator>();
+        //diamondsGenerator = FindObjectOfType<DiamondsGenerator>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (transform.position.x < platformGenerationPoint.position.x) {
-            platformSelector = Random.Range(0, platformPools.Length);
-
+        if (transform.position.x < platformGenerationPoint.position.x)
+        {
+            //platformSelector = Random.Range(0, platformPools.Length);
+            //palayokSelector = Random.Range(0, PalayokObjects.Length);
             distanceBetweenPlatform = Random.Range(platformDistanceBetweenMin, platformDistanceBetweenMax);
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetweenPlatform, 
-                                             transform.position.y, 
+            transform.position = new Vector3(transform.position.x + distanceBetweenPlatform,
+                                             transform.position.y,
                                              transform.position.z);
 
             heightChange = transform.position.y + Random.Range(-maxHeightChange, maxHeightChange);
@@ -64,38 +76,54 @@ public Transform platformGenerationPoint;
                 heightChange = minHeight;
             }
 
-            if (Random.Range(0f, 100f) < powerUpAppearThreshold) {
-                GameObject newPowerUp = powerUpPooler.GetPoolObject();
-                newPowerUp.transform.position = transform.position + new Vector3((platformWidths[platformSelector] / 2) + (distanceBetweenPlatform / 2), 
-                                                                                 Random.Range(powerUpHeight / 2, 
-                                                                                              powerUpHeight), 0f);
-                newPowerUp.transform.rotation = transform.rotation;
-                newPowerUp.SetActive(true);
-            }
+            //if (Random.Range(0f, 100f) < powerUpAppearThreshold) {
+            //GameObject newPowerUp = powerUpPooler.GetPoolObject();
+            //newPowerUp.transform.position = transform.position + new Vector3((platformWidths[platformSelector] / 2) + (distanceBetweenPlatform / 2), 
+            //                                                                 Random.Range(powerUpHeight / 2, 
+            //                                                                              powerUpHeight), 0f);
+            //newPowerUp.transform.rotation = transform.rotation;
+            //newPowerUp.SetActive(true);
+            //}
+            //if (Random.Range(0f, 100f) < bombGenerateThreshold) {
+            GameObject newPowerUp = GeneratePalayok();
+            //newPowerUp.transform.position = transform.position + new Vector3((palayokWidths[palayokSelector] /2) + (distanceBetweenPlatform / 2),
+            //transform.position.y + 2f, 0f);
+            newPowerUp.transform.position = transform.position;
+            newPowerUp.transform.rotation = transform.rotation;
+            newPowerUp.SetActive(true);
+            //}
+            //GameObject newPlatform = platformPools[platformSelector].GetPoolObject();
+            //newPlatform.transform.position = transform.position;
+            //newPlatform.transform.rotation = transform.rotation;
+            //newPlatform.SetActive(true);
 
-            GameObject newPlatform = platformPools[platformSelector].GetPoolObject();
-            newPlatform.transform.position = transform.position;
-            newPlatform.transform.rotation = transform.rotation;
-            newPlatform.SetActive(true);
+            //if (Random.Range(0f, 100f) < diamondsGenerateThreshold) {
+            //    diamondsGenerator.SpawnDiamonds(new Vector3(transform.position.x,
+            //                                                transform.position.y + 1f,
+            //                                                transform.position.z));
+            //}
 
-            if (Random.Range(0f, 100f) < diamondsGenerateThreshold) {
-                diamondsGenerator.SpawnDiamonds(new Vector3(transform.position.x,
-                                                            transform.position.y + 1f,
-                                                            transform.position.z));
-            }
-
-            if (Random.Range(0f, 100f) < spikeGenerateThreshold) {
-                GameObject newSpike = spikePooler.GetPoolObject();
-                float currentPlatformWidth = platformWidths[platformSelector];
-                float newSpikeXPosition = Random.Range(((currentPlatformWidth / 2) * -1) + 1f, (currentPlatformWidth / 2) - 1f);
-                Vector3 newPosition = new Vector3(newSpikeXPosition, .5f, 0f);
-                newSpike.transform.position = transform.position + newPosition;
-                newSpike.transform.rotation = transform.rotation;
-                newSpike.SetActive(true);
-            }
+            //if (Random.Range(0f, 100f) < spikeGenerateThreshold) {
+            //    GameObject newSpike = spikePooler.GetPoolObject();
+            //    float currentPlatformWidth = platformWidths[platformSelector];
+            //    float newSpikeXPosition = Random.Range(((currentPlatformWidth / 2) * -1) + 1f, (currentPlatformWidth / 2) - 1f);
+            //    Vector3 newPosition = new Vector3(newSpikeXPosition, .5f, 0f);
+            //    newSpike.transform.position = transform.position + newPosition;
+            //    newSpike.transform.rotation = transform.rotation;
+            //    newSpike.SetActive(true);
+            //}
 
             // Adjust the gap's size. move the platform generator to end of platform.
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), heightChange, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (palayokWidths[palayokSelector] / 2), heightChange, transform.position.z);
         }
+    }
+
+    GameObject GeneratePalayok(){
+        int i = Random.Range(0, PalayokObjects.Length);
+        this.palayokSelector = i;
+        GameObject gameObject = (GameObject)Instantiate(PalayokObjects[i]);
+		gameObject.SetActive(true);
+        //pooledObjects.Add(gameObject);
+        return gameObject;
     }
 }

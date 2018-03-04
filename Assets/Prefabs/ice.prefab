@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 61735829706676834}
   - component: {fileID: 114231923968177846}
   - component: {fileID: 114943793834349702}
+  - component: {fileID: 114325201597962564}
   m_Layer: 10
-  m_Name: Bomb
-  m_TagString: bomb
+  m_Name: ice
+  m_TagString: ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +56,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010240674, y: -0.11478233}
+  m_Offset: {x: -0.030723572, y: -0.14550596}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -66,7 +67,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.1097195, y: 2.9247704}
+  m_Size: {x: 3.1506853, y: 2.9862175}
   m_EdgeRadius: 0
 --- !u!114 &114231923968177846
 MonoBehaviour:
@@ -80,6 +81,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformDescructionPoint: {fileID: 0}
+--- !u!114 &114325201597962564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1569479854515232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559403831f0064af294c80f42184d1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doublePointMode: 0
+  spikeProffMode: 0
+  invulnerableMode: 0
+  iceMode: 0
+  powerUpLength: 1.5
+  beenClicked: 0
+  powerUpSelector: 0
 --- !u!114 &114943793834349702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b43a90d5b5e0149abb1d2e5fb25a067a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6efbc3affbdc4550909e8f758358e76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
