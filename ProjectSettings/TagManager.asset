@@ -5,9 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - KillBox
-  - object
   - star
   - ice
+  - normal
+  - object
+  - skull
+  - beehive
+  - life
+  - bomb
+  - 2x
   layers:
   - Default
   - TransparentFX

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
 
-    public Text scoreText, highScoreText;
-    public float scoreCounts, highScoreCounts, pointPerSecond;
+    public Text scoreText, highScoreText,gameScore;
+    public float scoreCounts, highScoreCounts, pointPerSecond,gameScoreCounts;
     public bool scoreIncreasing;
     public bool coinDoublePoints;
 	
@@ -19,9 +19,9 @@ public class ScoreManager : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
-        if (scoreIncreasing) {
-            scoreCounts += pointPerSecond * Time.deltaTime;
-        }
+        //if (scoreIncreasing) {
+        //    scoreCounts += pointPerSecond * Time.deltaTime;
+        //}
 
         if (scoreCounts > highScoreCounts) {
             highScoreCounts = scoreCounts;
@@ -30,9 +30,11 @@ public class ScoreManager : MonoBehaviour {
 		
         scoreText.text = "Score: " + Mathf.Round(scoreCounts);
         highScoreText.text = "High Score: " + Mathf.Round(highScoreCounts);
+        gameScore.text = ""+Mathf.Round(gameScoreCounts);
     }
 
     public void AddScore(int point) {
         scoreCounts += coinDoublePoints ? point * 2 : point;
+        gameScoreCounts += coinDoublePoints ? point * 2 : point;
     }
 }

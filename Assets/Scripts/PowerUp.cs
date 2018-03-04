@@ -39,4 +39,10 @@ public class PowerUp : MonoBehaviour {
         }
         gameObject.SetActive(false);
     }
+
+    private void OnMouseDown()
+    {
+		powerUpSource.Play();
+		powerUpManager.ActivePowerUpMode(doublePointMode, spikeProffMode, powerUpLength);
+    }
 }

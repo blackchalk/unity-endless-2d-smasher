@@ -21,10 +21,10 @@ public class PowerUpManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         scoreManager = FindObjectOfType<ScoreManager>();
-        platformGenerator = FindObjectOfType<PlatformGenerator>();
+        //platformGenerator = FindObjectOfType<PlatformGenerator>();
 
         normalPointPerSecond = scoreManager.pointPerSecond;
-        normalSpikeRate = platformGenerator.spikeGenerateThreshold;
+        //normalSpikeRate = platformGenerator.spikeGenerateThreshold;
     }
 
     // Update is called once per frame
@@ -37,19 +37,19 @@ public class PowerUpManager : MonoBehaviour {
                 scoreText.GetComponent<Text>().color = new Color(1f, 0.9f, 0f);
             }
 
-            if (spikeProffMode) {
-                platformGenerator.spikeGenerateThreshold = 0f;
-                scoreText.GetComponent<Text>().color = Color.white;
-            }
+            //if (spikeProffMode) {
+            //    platformGenerator.spikeGenerateThreshold = 0f;
+            //    scoreText.GetComponent<Text>().color = Color.white;
+            //}
 
-            if (powerUpLengthCounter < 0) {
-                scoreText.GetComponent<Text>().color = Color.white;
-                platformGenerator.spikeGenerateThreshold = normalSpikeRate;
-                scoreManager.coinDoublePoints = false;
-                doublePointMode = false;
-                spikeProffMode = false;
-                powerUpActive = false;
-            }
+            //if (powerUpLengthCounter < 0) {
+            //    scoreText.GetComponent<Text>().color = Color.white;
+            //    platformGenerator.spikeGenerateThreshold = normalSpikeRate;
+            //    scoreManager.coinDoublePoints = false;
+            //    doublePointMode = false;
+            //    spikeProffMode = false;
+            //    powerUpActive = false;
+            //}
         }
     }
 
