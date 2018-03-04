@@ -45,6 +45,19 @@ public class Item : MonoBehaviour
 
                         scoreManager.AddScore(score);
                         beenClicked = true;
+
+                if(gameObject.CompareTag("bomb")){
+                    ScoreManager.MinusHeart(1);
+                }
+
+				if (gameObject.CompareTag("life"))
+				{
+					ScoreManager.AddHeart(1);
+				}
+                if(gameObject.CompareTag("KillBox")){
+                    
+                    ScoreManager.MinusHeart(ScoreManager.HeartCount);
+                }
                 }
             }
         }

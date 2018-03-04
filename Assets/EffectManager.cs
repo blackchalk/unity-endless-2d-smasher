@@ -54,16 +54,16 @@ public class EffectManager : MonoBehaviour
 			if (doublePointMode)
 			{
 				scoreManager.coinDoublePoints = true;
-				scoreText.GetComponent<Text>().color = new Color(1f, 0.9f, 0f);
+				scoreText.GetComponent<Text>().color = Color.yellow;
 			}
 
-			if (spikeProffMode) {
-			    platformGenerator.spikeGenerateThreshold = 0f;
-			    scoreText.GetComponent<Text>().color = Color.white;
-			}
+			//if (spikeProffMode) {
+			//    platformGenerator.spikeGenerateThreshold = 0f;
+			//    scoreText.GetComponent<Text>().color = Color.white;
+			//}
 
             if(iceMode){
-                scoreText.GetComponent<Text>().color = Color.blue;
+                scoreText.GetComponent<Text>().color = ScoreManager.hexColor(0, 234, 255, 255);
                 iceLengthCounter -= Time.deltaTime;
                 if (iceLengthCounter < 0)
 				{
@@ -77,7 +77,7 @@ public class EffectManager : MonoBehaviour
 
 			if (powerUpLengthCounter < 0)
 			{
-				scoreText.GetComponent<Text>().color = Color.black;
+                scoreText.GetComponent<Text>().color = ScoreManager.hexColor(169,117,69,255);
                 //platformGenerator.spikeGenerateThreshold = normalSpikeRate;//null
 				scoreManager.coinDoublePoints = false;
 				doublePointMode = false;

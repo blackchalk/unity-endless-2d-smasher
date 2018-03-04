@@ -13,13 +13,14 @@ public class GameManager : MonoBehaviour {
     private ObjectDestroyer[] objectDestroyers;
     private ScoreManager scoreManager;
     public DeathMenu deathMenu;
-    private PowerUpManager powerUpManager;
+    //private PowerUpManager powerUpManager;
+    private EffectManager powerUpManager;
 
     // Use this for initialization
     void Start () {
         platformGeneratorStartPoint = platformGenerator.position;
         playerStartPoint = playerController.transform.position;
-        powerUpManager = FindObjectOfType<PowerUpManager>();
+        powerUpManager = FindObjectOfType<EffectManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
