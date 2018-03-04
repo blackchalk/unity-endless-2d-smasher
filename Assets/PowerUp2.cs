@@ -20,6 +20,9 @@ public class PowerUp2 : MonoBehaviour {
 
 	private void Awake()
 	{
+		powerUpManager = FindObjectOfType<EffectManager>();
+		powerUpSource = GameObject.Find("PowerUpSound").GetComponent<AudioSource>();
+		pc = GameObject.Find("Player").GetComponent<PlayerController>();
 		//int powerUpSelector = Random.Range(0, 3);
 		//GetComponent<SpriteRenderer>().sprite = upgradablePowerups[powerUpSelector];
 		if (gameObject.CompareTag("2x"))
@@ -44,9 +47,6 @@ public class PowerUp2 : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		powerUpManager = FindObjectOfType<EffectManager>();
-		powerUpSource = GameObject.Find("PowerUpSound").GetComponent<AudioSource>();
-        pc = GameObject.Find("Player").GetComponent<PlayerController>();
 		switch (powerUpSelector)
 		{
 			case 0:

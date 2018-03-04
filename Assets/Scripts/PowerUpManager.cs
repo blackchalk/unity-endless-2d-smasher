@@ -42,14 +42,14 @@ public class PowerUpManager : MonoBehaviour {
             //    scoreText.GetComponent<Text>().color = Color.white;
             //}
 
-            //if (powerUpLengthCounter < 0) {
-            //    scoreText.GetComponent<Text>().color = Color.white;
-            //    platformGenerator.spikeGenerateThreshold = normalSpikeRate;
-            //    scoreManager.coinDoublePoints = false;
-            //    doublePointMode = false;
-            //    spikeProffMode = false;
-            //    powerUpActive = false;
-            //}
+            if (powerUpLengthCounter < 0) {
+                scoreText.GetComponent<Text>().color = Color.white;
+                platformGenerator.spikeGenerateThreshold = normalSpikeRate;
+                scoreManager.coinDoublePoints = false;
+                doublePointMode = false;
+                spikeProffMode = false;
+                powerUpActive = false;
+            }
         }
     }
 
