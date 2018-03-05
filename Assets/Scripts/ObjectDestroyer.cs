@@ -15,7 +15,10 @@ public class ObjectDestroyer : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (transform.position.x < platformDescructionPoint.transform.position.x) {
-            
+            //if this is normal pot minus heart
+            if(gameObject.tag == "normal"){
+                ScoreManager.MinusHeart(1);
+            }
             //StartCoroutine(gameObject.GetComponent<Item>().restartStatus());
 			//gameObject.SetActive(false);
             Destroy(gameObject);// will get null reference. seems game is reusing this over and over

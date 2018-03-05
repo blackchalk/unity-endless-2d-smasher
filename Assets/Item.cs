@@ -43,8 +43,8 @@ public class Item : MonoBehaviour
                 else
                 {
 
-                        scoreManager.AddScore(score);
-                        beenClicked = true;
+                scoreManager.AddScore(score);
+                beenClicked = true;
 
                 if(gameObject.CompareTag("bomb")){
                     ScoreManager.MinusHeart(1);
@@ -59,6 +59,7 @@ public class Item : MonoBehaviour
                     ScoreManager.MinusHeart(ScoreManager.HeartCount);
                 }
                 }
+            Destroy(this.gameObject);
             }
         }
 

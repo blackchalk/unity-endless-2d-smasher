@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61466524906487014}
   - component: {fileID: 114217222147785998}
   - component: {fileID: 114564078602399552}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Death
   m_TagString: KillBox
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1092251527902476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.4408813, y: 0.7691978, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
