@@ -8,7 +8,7 @@ public class DeathMenu : MonoBehaviour {
     public string mainSceneName;
 
     public virtual void Retry() {
-        FindObjectOfType<GameManager>().ResetGame();
+        SceneManager.LoadScene("pokpok");
     }
 
     public virtual void QuitToMainMenu() {
