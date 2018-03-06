@@ -23,8 +23,26 @@ public class GameSettings : MonoBehaviour {
         dataController = FindObjectOfType<DataController>();
         if (PlayerPrefs.HasKey("PlayerCoins"))
         { 
-            coinText.text = dataController.GetPlayerCoins().ToString();
+            coinText.text = "Coins:"+dataController.GetPlayerCoins().ToString();
         }
+
+        ////doublePoints
+        //if (PlayerPrefs.HasKey("DoublePointDuration"))
+        //{
+        //    coinText.text = dataController.GetPlayerCoins().ToString();
+        //}
+
+        ////slow
+        //if (PlayerPrefs.HasKey("IcePointDuration"))
+        //{
+        //    coinText.text = dataController.GetPlayerCoins().ToString();
+        //}
+
+        ////invulnerable
+        //if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
+        //{
+        //    coinText.text = dataController.GetPlayerCoins().ToString();
+        //}
 
     }
 
@@ -50,4 +68,7 @@ public class GameSettings : MonoBehaviour {
     public void increasePointDuration(float x){
         doublePointSlider.value += x;
     }
+
+    //update prefs on button back pressed
+
 }

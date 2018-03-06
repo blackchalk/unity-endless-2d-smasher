@@ -10,11 +10,13 @@ public class Item : MonoBehaviour
     public string effectType; //given by a higher class
     private ScoreManager scoreManager;
     private EffectManager effectManager;
+    private DataController dataController;
 
     private void Awake()
     {
         effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        dataController = GameObject.Find("DataController").GetComponent<DataController>();
         effectType = gameObject.tag;
     }
     // Use this for initialization
@@ -46,6 +48,10 @@ public class Item : MonoBehaviour
                 scoreManager.AddScore(score);
                 beenClicked = true;
 
+                if(gameObject.CompareTag("normal")){
+                    dataController.SubmitNewPlayerCoins(1);
+                }
+
                 if(gameObject.CompareTag("bomb")){
                     ScoreManager.MinusHeart(1);
                 }
@@ -54,12 +60,13 @@ public class Item : MonoBehaviour
 				{
 					ScoreManager.AddHeart(1);
 				}
-                if(gameObject.CompareTag("KillBox")){
-                    
+                if(gameObject.CompareTag("KillBox"))
+                {
                     ScoreManager.MinusHeart(ScoreManager.HeartCount);
                 }
+
                 }
-            Destroy(this.gameObject);
+                Destroy(this.gameObject);
             }
         }
 
