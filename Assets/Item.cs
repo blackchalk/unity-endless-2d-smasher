@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
     public string effectType; //given by a higher class
     public int selectedWeapon;
     public GameObject weapon;
+    public float weaponAnimationDelay;
     private ScoreManager scoreManager;
     private EffectManager effectManager;
     private DataController dataController;
@@ -24,11 +25,7 @@ public class Item : MonoBehaviour
         dataController = GameObject.Find("DataController").GetComponent<DataController>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        _exploadable = GetComponent<Explodable>();
 
-        weapon = this.gameObject.transform.GetChild(0).gameObject;
-        _anim = weapon.GetComponent<Animator>();
-        childspriteRenderer = weapon.GetComponent<SpriteRenderer>();
         effectType = gameObject.tag;
     }
     // Use this for initialization
@@ -36,12 +33,20 @@ public class Item : MonoBehaviour
     {
         
         beenClicked = false;
-        //setup weapon to use
-        selectedWeapon = dataController.selectedWeapon;
-        _anim.enabled = false;
-        _anim.runtimeAnimatorController = dataController.animators[selectedWeapon];
-        childspriteRenderer.sprite = dataController.spr[selectedWeapon];
-        childspriteRenderer.enabled = false;
+        if (effectType == "normal")
+        {
+			_exploadable = GetComponent<Explodable>();
+
+			weapon = this.gameObject.transform.GetChild(0).gameObject;
+			_anim = weapon.GetComponent<Animator>();
+			childspriteRenderer = weapon.GetComponent<SpriteRenderer>();
+            //setup weapon to use
+            selectedWeapon = dataController.selectedWeapon;
+            _anim.enabled = false;
+            _anim.runtimeAnimatorController = dataController.animators[selectedWeapon];
+            childspriteRenderer.sprite = dataController.spr[selectedWeapon];
+            childspriteRenderer.enabled = false;
+        }
 
     }
 
@@ -110,7 +115,7 @@ public class Item : MonoBehaviour
 	{
         childspriteRenderer.enabled = true;
         _anim.enabled = true;
-		yield return new WaitForSeconds(0.4f);
+		yield return new WaitForSeconds(weaponAnimationDelay);
 		_exploadable.explode();
 		ExplosionForce ef = GameObject.FindObjectOfType<ExplosionForce>();
 		ef.doExplosion(transform.position);
