@@ -3242,9 +3242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34a2e7cffbf44f6f802b647dacf8a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 4
   speedMutiplier: 1.2
-  speedIncreaseMilestone: 100
+  speedIncreaseMilestone: 50
   jumpForce: 13
   jumpTime: 0.05
   isOnGround: 0

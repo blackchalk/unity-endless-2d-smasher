@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public DeathMenu deathMenu;
     //private PowerUpManager powerUpManager;
     private EffectManager powerUpManager;
+    //private DataController dataController;
 
     // Use this for initialization
     void Start () {
@@ -23,9 +24,11 @@ public class GameManager : MonoBehaviour {
         playerStartPoint = playerController.transform.position;
         powerUpManager = FindObjectOfType<EffectManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
+        //dataController = FindObjectOfType<DataController>();
     }
 
     public void RestartGame() {
+
         scoreManager.scoreIncreasing = false;
         playerController.gameObject.SetActive(false);
         deathMenu.gameObject.SetActive(true);
@@ -46,5 +49,14 @@ public class GameManager : MonoBehaviour {
         scoreManager.scoreCounts = 0;
         scoreManager.scoreIncreasing = true;
     }
+
+    //private IEnumerator submit(){
+
+    //    //submit collected coins
+    //    int x = (int)scoreManager.scoreCounts;
+    //    dataController.SubmitNewPlayerCoins(x);
+
+    //    yield return new WaitForSeconds(0.1f);
+    //}
 
 }

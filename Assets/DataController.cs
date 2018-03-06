@@ -27,20 +27,31 @@ public class DataController : MonoBehaviour
 
     private void SavePlayerCoins()
     {
-        Debug.Log("Saving coins.");
+
         PlayerPrefs.SetInt("PlayerCoins",playerProgress.PlayerCoins);
+        Debug.Log("Saved coins.");
     }
 
     public void SubmitNewPlayerCoins(int newCoins){
-        Debug.Log("additional coins:" + newCoins);
+        Debug.Log("add coins:" + newCoins);
         LoadPlayerCoins();
         playerProgress.PlayerCoins += newCoins;
         SavePlayerCoins();
-        Debug.Log("new Coin total : "+playerProgress.PlayerCoins);
+
+    }
+
+    public void DeductFromPlayerCoins(int coinAmount)
+    {
+        Debug.Log("deduct coins:" + coinAmount);
+        LoadPlayerCoins();
+        playerProgress.PlayerCoins -= coinAmount;
+        SavePlayerCoins();
+
     }
 
     public int GetPlayerCoins(){
-        
+        LoadPlayerCoins();
+        Debug.Log("saved coins total : " + playerProgress.PlayerCoins);
         return playerProgress.PlayerCoins;
     }
 }

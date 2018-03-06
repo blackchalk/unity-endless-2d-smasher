@@ -56,6 +56,7 @@ public class ScoreManager : MonoBehaviour {
             Heart0.SetActive(false);
 		}else if (HeartCount == 0)
 		{
+            HeartCount = 3;
 			Heart3.SetActive(false);
 			Heart2.SetActive(false);
 			Heart1.SetActive(false);
