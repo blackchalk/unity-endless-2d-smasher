@@ -6,7 +6,15 @@ public class DataController : MonoBehaviour
 {
 
     private PlayerProgress playerProgress;
-
+    //weapons
+    public Sprite[] spr;
+    public RuntimeAnimatorController[] animators;
+    public int selectedWeapon;
+    //upgrades
+    public int doublePointLevel;
+    public int icePointLevel;
+    public int invulnerablePointLevel;
+    public int levelPointsMultiplier = 100;//100
 
     // Use this for initialization
     void Start()

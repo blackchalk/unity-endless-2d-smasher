@@ -26,6 +26,6 @@ public class StartPoint : MonoBehaviour {
 
         readyText.enabled = false;
         player.SetActive(true);
-        scoreManager.scoreIncreasing = true;
+        //scoreManager.scoreIncreasing = true;
     }
 }

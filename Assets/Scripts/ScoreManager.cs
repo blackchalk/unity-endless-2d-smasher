@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour {
     public GameObject Heart3, Heart2, Heart1, Heart0;
     public Text scoreText, highScoreText,gameScore;
     public float scoreCounts, highScoreCounts, pointPerSecond,gameScoreCounts;
-    public bool scoreIncreasing;
+    //public bool scoreIncreasing;
     public bool coinDoublePoints;
     public AudioSource deathSound;
     private GameManager gameManager;
@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
         
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		HeartCount = 3;
         if (PlayerPrefs.HasKey("HighScores")) {
             highScoreCounts = PlayerPrefs.GetFloat("HighScores");

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 
     public void RestartGame() {
 
-        scoreManager.scoreIncreasing = false;
+        //scoreManager.scoreIncreasing = false;
         playerController.gameObject.SetActive(false);
         deathMenu.gameObject.SetActive(true);
     }
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
         playerController.gameObject.SetActive(true);
 
         scoreManager.scoreCounts = 0;
-        scoreManager.scoreIncreasing = true;
+        //scoreManager.scoreIncreasing = true;
     }
 
     //private IEnumerator submit(){

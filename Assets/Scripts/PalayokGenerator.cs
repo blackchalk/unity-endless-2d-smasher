@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PalayokGenerator : MonoBehaviour {
-public Transform platformGenerationPoint;
+    
+    public Transform platformGenerationPoint;
     private float platformWidth;
 
-    private float distanceBetweenPlatform;
-    public float platformDistanceBetweenMin;
-    public float platformDistanceBetweenMax;
+    public float distanceBetweenPlatform;
+    //public float platformDistanceBetweenMin;
+    //public float platformDistanceBetweenMax;
 
-    private int platformSelector;
-    private float[] platformWidths;
+    //private int platformSelector;
+    //private float[] platformWidths;
 
-    public ObjectPooler[] platformPools;
+    //public ObjectPooler[] platformPools;
 
     private float minHeight;
     public Transform maxHeightPoint;
@@ -22,24 +23,24 @@ public Transform platformGenerationPoint;
     public float maxHeightChange;
     private float heightChange;
 
-    private DiamondsGenerator diamondsGenerator;
-    public float diamondsGenerateThreshold;
+    //private DiamondsGenerator diamondsGenerator;
+    //public float diamondsGenerateThreshold;
 
     // Spike
-    public float spikeGenerateThreshold;
+ //   public float spikeGenerateThreshold;
 
-    public ObjectPooler spikePooler;
+ //   public ObjectPooler spikePooler;
 
-    public int powerUpHeight;
-    public float powerUpAppearThreshold;
-    public ObjectPooler powerUpPooler;
+ //   public int powerUpHeight;
+ //   public float powerUpAppearThreshold;
+ //   public ObjectPooler powerUpPooler;
 
-	public float bombGenerateThreshold;
-    public ObjectPooler bombPooler;
+	//public float bombGenerateThreshold;
+    //public ObjectPooler bombPooler;
 
     public GameObject[] PalayokObjects;
-	public float[] palayokWidths;
-    public int palayokSelector;
+	private float[] palayokWidths;
+    private int palayokSelector;
 
 	// Use this for initialization
 	void Start() {
@@ -64,7 +65,7 @@ public Transform platformGenerationPoint;
         {
             //platformSelector = Random.Range(0, platformPools.Length);
             //palayokSelector = Random.Range(0, PalayokObjects.Length);
-            distanceBetweenPlatform = Random.Range(platformDistanceBetweenMin, platformDistanceBetweenMax);
+            //distanceBetweenPlatform = Random.Range(platformDistanceBetweenMin, platformDistanceBetweenMax);
             transform.position = new Vector3(transform.position.x + distanceBetweenPlatform,
                                              transform.position.y,
                                              transform.position.z);
