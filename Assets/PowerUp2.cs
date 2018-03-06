@@ -13,6 +13,7 @@ public class PowerUp2 : MonoBehaviour {
     private EffectManager powerUpManager;
 	private AudioSource powerUpSource;
     private PlayerController pc;
+    private DataController dc;
     public bool beenClicked = false;
 
     //public Sprite[] upgradablePowerups;
@@ -23,6 +24,7 @@ public class PowerUp2 : MonoBehaviour {
 		powerUpManager = FindObjectOfType<EffectManager>();
 		powerUpSource = GameObject.Find("PowerUpSound").GetComponent<AudioSource>();
 		pc = GameObject.Find("Player").GetComponent<PlayerController>();
+        dc = GameObject.Find("DataController").GetComponent<DataController>();
 		//int powerUpSelector = Random.Range(0, 3);
 		//GetComponent<SpriteRenderer>().sprite = upgradablePowerups[powerUpSelector];
 		if (gameObject.CompareTag("2x"))
@@ -50,6 +52,7 @@ public class PowerUp2 : MonoBehaviour {
 		switch (powerUpSelector)
 		{
 			case 0:
+                powerUpLength = dc.GetPlayerDoublePoint();
 				doublePointMode = true;
 				break;
 			case 1:

@@ -96,7 +96,7 @@ MonoBehaviour:
   spikeProffMode: 0
   invulnerableMode: 0
   iceMode: 0
-  powerUpLength: 1.5
+  powerUpLength: 0
   beenClicked: 0
   powerUpSelector: 0
 --- !u!114 &114943793834349702
@@ -113,6 +113,10 @@ MonoBehaviour:
   score: 0
   beenClicked: 0
   effectType: 
+  selectedWeapon: 0
+  weapon: {fileID: 0}
+  weaponAnimationDelay: 0
+  childspriteRenderer: {fileID: 0}
 --- !u!212 &212515463284462126
 SpriteRenderer:
   m_ObjectHideFlags: 1

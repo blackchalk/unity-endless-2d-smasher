@@ -20,10 +20,11 @@ public class DataController : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        LoadPlayerCoins();
+        setupupPrefs();
+
     }
 
-    private void LoadPlayerCoins()
+    private void setupupPrefs()
     {
 
         playerProgress = new PlayerProgress();
@@ -33,10 +34,12 @@ public class DataController : MonoBehaviour
             playerProgress.PlayerCoins = PlayerPrefs.GetInt("PlayerCoins");
         }
 
-        //if (PlayerPrefs.HasKey("DoublePointDuration"))
-        //{
-        //    playerProgress.PlayerDoublePointPurchased = PlayerPrefs.GetInt("DoublePointDuration");
-        //}
+        if (PlayerPrefs.HasKey("DoublePointDuration"))
+        {
+            
+            playerProgress.PlayerDoublePointPurchased = PlayerPrefs.GetInt("DoublePointDuration");
+            doublePointLevel = playerProgress.PlayerDoublePointPurchased;
+        }
 
         //if (PlayerPrefs.HasKey("IcePointDuration"))
         //{
@@ -79,7 +82,7 @@ public class DataController : MonoBehaviour
     //submit
     public void SubmitNewPlayerCoins(int newCoins){
         Debug.Log("add coins:" + newCoins);
-        LoadPlayerCoins();
+        setupupPrefs();
         playerProgress.PlayerCoins += newCoins;
         SavePlayerCoins();
 
@@ -88,7 +91,7 @@ public class DataController : MonoBehaviour
     public void SubmitNewPlayerDouble(int newPurchased)
     {
         Debug.Log("add coins:" + newPurchased);
-        LoadPlayerCoins();
+        setupupPrefs();
         playerProgress.PlayerDoublePointPurchased += newPurchased;
         SavePlayerDoublePoints();
 
@@ -97,7 +100,7 @@ public class DataController : MonoBehaviour
     public void SubmitNewPlayerIce(int newCoins)
     {
         Debug.Log("add coins:" + newCoins);
-        LoadPlayerCoins();
+        setupupPrefs();
         playerProgress.PlayerIcePointPurchased += newCoins;
         SavePlayerIcePoints();
 
@@ -106,7 +109,7 @@ public class DataController : MonoBehaviour
     public void SubmitNewPlayerInvulnerable(int newCoins)
     {
         Debug.Log("add coins:" + newCoins);
-        LoadPlayerCoins();
+        setupupPrefs();
         playerProgress.PlayerInvunerablePointPurchased += newCoins;
         SavePlayerInvulnerablePoints();
 
@@ -115,36 +118,43 @@ public class DataController : MonoBehaviour
     public void DeductFromPlayerCoins(int coinAmount)
     {
         Debug.Log("DeductFromPlayerCoins:" + coinAmount);
-        LoadPlayerCoins();
+        setupupPrefs();
         playerProgress.PlayerCoins -= coinAmount;
         SavePlayerCoins();
 
     }
 
     public int GetPlayerCoins(){
-        LoadPlayerCoins();
+        setupupPrefs();
         Debug.Log("GetPlayerCoins: " + playerProgress.PlayerCoins);
         return playerProgress.PlayerCoins;
     }
 
     public int GetPlayerDoublePoint()
     {
-        LoadPlayerCoins();
+        setupupPrefs();
         Debug.Log("GetPlayerDoublePoint: " + playerProgress.PlayerDoublePointPurchased);
         return playerProgress.PlayerDoublePointPurchased;
     }
 
     public int GetPlayerIcePoint()
     {
-        LoadPlayerCoins();
+        setupupPrefs();
         Debug.Log("GetPlayerDoublePoint: " + playerProgress.PlayerIcePointPurchased);
         return playerProgress.PlayerIcePointPurchased;
     }
 
     public int GetPlayerInvulnerablePoint()
     {
-        LoadPlayerCoins();
+        setupupPrefs();
         Debug.Log("GetPlayerInvulnerablePoint: " + playerProgress.PlayerInvunerablePointPurchased);
         return playerProgress.PlayerInvunerablePointPurchased;
+    }
+    //get set
+    public void setDoublePointValue(int level){
+        this.doublePointLevel = level;
+    }
+    public int getDoublePointValue(){
+        return this.doublePointLevel;
     }
 }
