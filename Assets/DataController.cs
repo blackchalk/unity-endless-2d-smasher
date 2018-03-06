@@ -25,20 +25,20 @@ public class DataController : MonoBehaviour
             playerProgress.PlayerCoins = PlayerPrefs.GetInt("PlayerCoins");
         }
 
-        if (PlayerPrefs.HasKey("DoublePointDuration"))
-        {
-            playerProgress.PlayerDoublePointPurchased = PlayerPrefs.GetInt("DoublePointDuration");
-        }
+        //if (PlayerPrefs.HasKey("DoublePointDuration"))
+        //{
+        //    playerProgress.PlayerDoublePointPurchased = PlayerPrefs.GetInt("DoublePointDuration");
+        //}
 
-        if (PlayerPrefs.HasKey("IcePointDuration"))
-        {
-            playerProgress.PlayerIcePointPurchased = PlayerPrefs.GetInt("IcePointDuration");
-        }
+        //if (PlayerPrefs.HasKey("IcePointDuration"))
+        //{
+        //    playerProgress.PlayerIcePointPurchased = PlayerPrefs.GetInt("IcePointDuration");
+        //}
 
-        if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
-        {
-            playerProgress.PlayerInvunerablePointPurchased = PlayerPrefs.GetInt("InvulnerablePointDuration");
-        }
+        //if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
+        //{
+        //    playerProgress.PlayerInvunerablePointPurchased = PlayerPrefs.GetInt("InvulnerablePointDuration");
+        //}
     }
 
     private void SavePlayerCoins()

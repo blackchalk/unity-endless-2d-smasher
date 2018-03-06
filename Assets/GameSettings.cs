@@ -69,6 +69,16 @@ public class GameSettings : MonoBehaviour {
         doublePointSlider.value += x;
     }
 
+    public void increaseIcePointDuration(float x)
+    {
+        iceSlider.value += x;
+    }
+
+    public void increaseStarPointDuration(float x)
+    {
+        starSlider.value += x;
+    }
+
     //update prefs on button back pressed
 
 }
