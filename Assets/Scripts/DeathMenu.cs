@@ -12,7 +12,7 @@ public class DeathMenu : MonoBehaviour {
     }
 
     public virtual void QuitToMainMenu() {
-        SceneManager.LoadScene(mainSceneName);
+        SceneManager.LoadScene("MAINMENU");
     }
 
 }

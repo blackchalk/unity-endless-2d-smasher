@@ -8,22 +8,24 @@ public class WeaponChoiceManager : MonoBehaviour {
 public GameObject prevBtn;
 	public GameObject nextBtn;
 	public GameObject instructionHolderObj;
-	public Sprite[] spr = new Sprite[9];
+	public Sprite[] spr = new Sprite[5];
 	public Sprite initialPage;
 	private Image currentSprite;
+    private DataController dc;
 	public int x;
 
 	// Use this for initialization
 	void Start()
 	{
 		currentSprite = instructionHolderObj.GetComponentInChildren<Image>();
+        dc = GameObject.Find("DataController").GetComponent<DataController>();
 		prevBtn.SetActive(false);
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (x == 8)
+		if (x == 4)
 		{
 			nextBtn.SetActive(false);
 		}
@@ -31,7 +33,7 @@ public GameObject prevBtn;
 		{
 			nextBtn.SetActive(true);
 		}
-		if (x == -1)
+		if (x == 0)
 		{
 			currentSprite.sprite = initialPage;
 			prevBtn.SetActive(false);
@@ -75,5 +77,9 @@ public GameObject prevBtn;
 		}
 
 	}
+
+    public void getWeaponOnBackPressed(){
+        dc.selectedWeapon = x;
+    }
 
 }

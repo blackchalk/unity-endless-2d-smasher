@@ -20,9 +20,14 @@ public class GameSettings : MonoBehaviour {
     public Animator coinInsufficientFundsAnimation;
     private DataController dataController;
 
+    private AudioSource audioSource;
+    private AudioSource btnClick;
+
 	// Use this for initialization
 	void Start () {
-        
+        audioSource = GameObject.Find("Music").GetComponent<AudioSource>();
+        btnClick = GameObject.Find("ButtonClick").GetComponent<AudioSource>();
+        audioSource.Play();
         dataController = FindObjectOfType<DataController>();
         if (PlayerPrefs.HasKey("PlayerCoins"))
         {
@@ -75,6 +80,10 @@ public class GameSettings : MonoBehaviour {
     private int getSliderValue(){
         doublePointValue = doublePointSlider.value;
         return (int)doublePointValue;
+    }
+
+    public void playClickSound(){
+        btnClick.Play();
     }
 
     public void increasePointDuration(float x)
