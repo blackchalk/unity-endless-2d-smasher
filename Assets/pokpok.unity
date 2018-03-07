@@ -3351,6 +3351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformGenerator: {fileID: 128749632}
+  isPaused: 0
   playerController: {fileID: 1225578536}
   deathMenu: {fileID: 1488329846}
 --- !u!4 &1659138565

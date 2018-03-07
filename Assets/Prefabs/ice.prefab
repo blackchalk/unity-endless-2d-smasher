@@ -96,7 +96,7 @@ MonoBehaviour:
   spikeProffMode: 0
   invulnerableMode: 0
   iceMode: 0
-  powerUpLength: 0
+  powerUpLength: 0.5
   beenClicked: 0
   powerUpSelector: 0
 --- !u!114 &114943793834349702

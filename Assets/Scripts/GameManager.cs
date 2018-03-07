@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     public Transform platformGenerator;
+    public bool isPaused = false;
     private Vector3 platformGeneratorStartPoint;
 
     public PlayerController playerController;
@@ -28,13 +29,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RestartGame() {
-
+        isPaused = true;
         //scoreManager.scoreIncreasing = false;
         playerController.gameObject.SetActive(false);
         deathMenu.gameObject.SetActive(true);
     }
 
     public void ResetGame() {
+        isPaused = false;
         powerUpManager.InActivePowerUpMode();
         deathMenu.gameObject.SetActive(false);
         objectDestroyers = FindObjectsOfType<ObjectDestroyer>();
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour {
         playerController.transform.position = playerStartPoint;
         platformGenerator.position = platformGeneratorStartPoint;
         playerController.gameObject.SetActive(true);
-
+        isPaused = false;
         scoreManager.scoreCounts = 0;
         //scoreManager.scoreIncreasing = true;
     }

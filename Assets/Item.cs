@@ -37,7 +37,7 @@ public class Item : MonoBehaviour
         {
 			_exploadable = GetComponent<Explodable>();
 
-			weapon = this.gameObject.transform.GetChild(0).gameObject;
+			weapon = gameObject.transform.GetChild(0).gameObject;
 			_anim = weapon.GetComponent<Animator>();
 			childspriteRenderer = weapon.GetComponent<SpriteRenderer>();
             //setup weapon to use
@@ -61,7 +61,6 @@ public class Item : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             effectManager.currentGameEffect = effectType;
-            Debug.Log("" + gameObject.tag + " clicked.");
 
                 if (beenClicked)
                 {
@@ -70,40 +69,31 @@ public class Item : MonoBehaviour
                 else
                 {
 
-                scoreManager.AddScore(score);
-                beenClicked = true;
+                    beenClicked = true;
 
-                if(gameObject.CompareTag("normal")){
-                    
-                    StartCoroutine("doTransitionOfSprite1");
-                    dataController.SubmitNewPlayerCoins(1);
-                    //StopCoroutine("doTransitionOfSprite1");
-                }
+                    if(gameObject.CompareTag("normal") && !gameManager.isPaused){
+                        scoreManager.AddScore(score);
+                        StartCoroutine("doTransitionOfSprite1");
+                        dataController.SubmitNewPlayerCoins(1);
+                    }
 
-                if(gameObject.CompareTag("bomb")){
-                    ScoreManager.MinusHeart(1);
-                }
+                    if(gameObject.CompareTag("bomb")){
+                        ScoreManager.MinusHeart(1);
+                    }
 
-				if (gameObject.CompareTag("life"))
-				{
-					ScoreManager.AddHeart(1);
-				}
-                if(gameObject.CompareTag("KillBox"))
-                {
-                    //ScoreManager.MinusHeart(ScoreManager.HeartCount);
-                    gameManager.RestartGame();
-                }
+        			if (gameObject.CompareTag("life"))
+        			{
+        				ScoreManager.AddHeart(1);
+        			}
+                    if(gameObject.CompareTag("KillBox"))
+                    {
+                        gameManager.RestartGame();
+                    }
 
                 }
-                //Destroy(this.gameObject);
             }
         }
 
-        public IEnumerator restartStatus(){
-            beenClicked = false;
-        Debug.Log("falsified");
-            yield return new WaitForSeconds(0.4f);
-        }
 
 	IEnumerator doTransitionOfSprite()
 	{
