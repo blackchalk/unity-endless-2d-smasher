@@ -11,6 +11,8 @@ public class GameSettings : MonoBehaviour {
 
     private float doublePointValue;
     private int currentDoublePointCoinValue;
+    private int currentIceValue;
+    private int currentStarValue;
     private float icePointValue;
     private float starPointValue;
 
@@ -43,16 +45,16 @@ public class GameSettings : MonoBehaviour {
 
 
         ////slow
-        //if (PlayerPrefs.HasKey("IcePointDuration"))
-        //{
-        //    coinText.text = dataController.GetPlayerCoins().ToString();
-        //}
+        if (PlayerPrefs.HasKey("IcePointDuration"))
+        {
+            setupIceValue();
+        }
 
         ////invulnerable
-        //if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
-        //{
-        //    coinText.text = dataController.GetPlayerCoins().ToString();
-        //}
+        if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
+        {
+            coinText.text = dataController.GetPlayerCoins().ToString();
+        }
         coinAnimateText.enabled = false;
         coinInsufficientFundsAnimation.enabled = false;
 
@@ -82,6 +84,19 @@ public class GameSettings : MonoBehaviour {
         return (int)doublePointValue;
     }
 
+    //pass the value to a accessible variable
+    private int getIceSliderValue()
+    {
+        icePointValue = iceSlider.value;
+        return (int)icePointValue;
+    }
+
+    private int getStarSliderValue()
+    {
+        starPointValue = starSlider.value;
+        return (int)starPointValue;
+    }
+
     public void playClickSound(){
         btnClick.Play();
     }
@@ -91,7 +106,7 @@ public class GameSettings : MonoBehaviour {
 
         int nextLevelCoinValue = 0;
 
-        setupDoublePointValue();
+        setupIceValue();
 
         nextLevelCoinValue = currentDoublePointCoinValue + 200;
 
@@ -111,7 +126,62 @@ public class GameSettings : MonoBehaviour {
         }
         //if(coinInsufficientFundsAnimation.)
         //coinInsufficientFundsAnimation.enabled = false;
+    }
 
+
+    public void increaseIceDuration(float x)
+    {
+
+        int nextLevelCoinValue = 0;
+
+        setupIceValue();
+
+        nextLevelCoinValue = currentIceValue + 200;
+
+        if (coinsAccumulated > nextLevelCoinValue)
+        {
+            //do the thing
+            iceSlider.value += x;
+            //math
+            dataController.DeductFromPlayerCoins(nextLevelCoinValue);
+            dataController.SubmitNewPlayerIce((int)doublePointSlider.value);
+            setupIceValue();
+            setUpViewsForCoins();
+
+        }
+        else
+        {
+            StartCoroutine("doTransitionOfSprite1", nextLevelCoinValue);
+            Debug.Log("insufficient funds.");
+        }
+
+    }
+
+    public void increaseStarDuration(float x)
+    {
+
+        int nextLevelCoinValue = 0;
+
+        setupIceValue();
+
+        nextLevelCoinValue = currentStarValue + 200;
+
+        if (coinsAccumulated > nextLevelCoinValue)
+        {
+            //do the thing
+            starSlider.value += x;
+            //math
+            dataController.DeductFromPlayerCoins(nextLevelCoinValue);
+            dataController.SubmitNewPlayerInvulnerable((int)starSlider.value);
+            setupStarValue();
+            setUpViewsForCoins();
+
+        }
+        else
+        {
+            StartCoroutine("doTransitionOfSprite1", nextLevelCoinValue);
+            Debug.Log("insufficient funds.");
+        }
 
     }
 
@@ -130,6 +200,42 @@ public class GameSettings : MonoBehaviour {
             case 8: currentDoublePointCoinValue = 1600; break;
             case 9: currentDoublePointCoinValue = 1800; break;
             case 10: currentDoublePointCoinValue = 2000; break;
+        }
+    }
+
+    private void setupIceValue()
+    {
+        switch (getIceSliderValue())
+        {
+            case 0: currentIceValue = 0; break;
+            case 1: currentIceValue = 200; break;
+            case 2: currentIceValue = 400; break;
+            case 3: currentIceValue = 600; break;
+            case 4: currentIceValue = 800; break;
+            case 5: currentIceValue = 1000; break;
+            case 6: currentIceValue = 1200; break;
+            case 7: currentIceValue = 1400; break;
+            case 8: currentIceValue = 1600; break;
+            case 9: currentIceValue = 1800; break;
+            case 10: currentIceValue = 2000; break;
+        }
+    }
+
+    private void setupStarValue()
+    {
+        switch (getStarSliderValue())
+        {
+            case 0: currentStarValue = 0; break;
+            case 1: currentStarValue = 200; break;
+            case 2: currentStarValue = 400; break;
+            case 3: currentStarValue = 600; break;
+            case 4: currentStarValue = 800; break;
+            case 5: currentStarValue = 1000; break;
+            case 6: currentStarValue = 1200; break;
+            case 7: currentStarValue = 1400; break;
+            case 8: currentStarValue = 1600; break;
+            case 9: currentStarValue = 1800; break;
+            case 10: currentStarValue = 2000; break;
         }
     }
 

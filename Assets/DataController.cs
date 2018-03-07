@@ -41,10 +41,10 @@ public class DataController : MonoBehaviour
             doublePointLevel = playerProgress.PlayerDoublePointPurchased;
         }
 
-        //if (PlayerPrefs.HasKey("IcePointDuration"))
-        //{
-        //    playerProgress.PlayerIcePointPurchased = PlayerPrefs.GetInt("IcePointDuration");
-        //}
+        if (PlayerPrefs.HasKey("IcePointDuration"))
+        {
+            playerProgress.PlayerIcePointPurchased = PlayerPrefs.GetInt("IcePointDuration");
+        }
 
         //if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
         //{

@@ -56,6 +56,7 @@ public class PowerUp2 : MonoBehaviour {
 				doublePointMode = true;
 				break;
 			case 1:
+                //TODO
 				iceMode = true;
                 break;
 			case 2:
