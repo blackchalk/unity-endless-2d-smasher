@@ -144,7 +144,7 @@ public class GameSettings : MonoBehaviour {
             iceSlider.value += x;
             //math
             dataController.DeductFromPlayerCoins(nextLevelCoinValue);
-            dataController.SubmitNewPlayerIce((int)doublePointSlider.value);
+            dataController.SubmitNewPlayerIce((int)iceSlider.value);
             setupIceValue();
             setUpViewsForCoins();
 

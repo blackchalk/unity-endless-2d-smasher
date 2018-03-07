@@ -7,6 +7,7 @@ public class EffectManager : MonoBehaviour
 {
     private ScoreManager scoreManager;
     private PlayerController playerController;
+    private DataController dc;
     public string currentGameEffect;
     public float lastKnownPlayerMoveSpeed;
     public float currentSpeedAtIce;
@@ -34,7 +35,7 @@ public class EffectManager : MonoBehaviour
         //scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		scoreManager = FindObjectOfType<ScoreManager>();
         playerController = FindObjectOfType<PlayerController>();
-		//platformGenerator = FindObjectOfType<PlatformGenerator>();
+        dc = GameObject.Find("DataController").GetComponent<DataController>();
 
 		normalPointPerSecond = scoreManager.pointPerSecond;
 		//normalSpikeRate = platformGenerator.spikeGenerateThreshold;
@@ -42,7 +43,7 @@ public class EffectManager : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        
+
 	}
 	
 	// Update is called once per frame
