@@ -70,14 +70,14 @@ public class Item : MonoBehaviour
         {
             effectManager.currentGameEffect = effectType;
 
-                if (beenClicked)
-                {
-                    return;
-                }
-                else
-                {
+                //if (beenClicked)
+                //{
+                //    return;
+                //}
+                //else
+                //{
 
-                    beenClicked = true;
+                    //beenClicked = true;
 
                     if(gameObject.CompareTag("normal") && !gameManager.isPaused){
                         scoreManager.AddScore(score);
@@ -129,7 +129,7 @@ public class Item : MonoBehaviour
                     //gameManager.RestartGame();
                 }
 
-                }
+                //}
             }
         }
 
@@ -146,10 +146,11 @@ public class Item : MonoBehaviour
         childspriteRenderer.enabled = true;
         _anim.enabled = true;
 		yield return new WaitForSeconds(weaponAnimationDelay);
-		//_exploadable.explode();
+        _anim.enabled = false;
+        //_exploadable.explode();
 		//ExplosionForce ef = GameObject.FindObjectOfType<ExplosionForce>();
 		//ef.doExplosion(transform.position);
-		Destroy(gameObject);
+		//Destroy(gameObject);
 	}
 
 }
