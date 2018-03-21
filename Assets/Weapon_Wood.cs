@@ -91,6 +91,7 @@ public class Weapon_Wood : Weapon {
                 hit.collider.gameObject.SendMessage("decreaseHealth", Damage, SendMessageOptions.DontRequireReceiver);
 			}
 
+
 			//isHit = false;
 			//Destroy(GameObject.Find(hit.collider.gameObject.name));
 		}
