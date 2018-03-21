@@ -80,10 +80,10 @@ public class Item : MonoBehaviour
                     //beenClicked = true;
 
                     if(gameObject.CompareTag("normal") && !gameManager.isPaused){
-                        scoreManager.AddScore(score);
-                        coinSound.Play();
-                        StartCoroutine("doTransitionOfSprite1");
-                        dataController.SubmitNewPlayerCoins(1);
+                        //scoreManager.AddScore(score);
+                        //coinSound.Play();
+                        //StartCoroutine("doTransitionOfSprite1");
+                        //dataController.SubmitNewPlayerCoins(1);
                     }
 
                     if(gameObject.CompareTag("bomb")){

@@ -88,7 +88,7 @@ public class Weapon_Wood : Weapon {
 
 				//Send damage message (deal damage to enemy)
                 hit.collider.gameObject.SendMessage("TakeDamage", Damage, SendMessageOptions.DontRequireReceiver);
-
+                hit.collider.gameObject.SendMessage("decreaseHealth", Damage, SendMessageOptions.DontRequireReceiver);
 			}
 
 			//isHit = false;

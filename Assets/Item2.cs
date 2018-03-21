@@ -6,7 +6,7 @@ public class Item2 : MonoBehaviour {
 
     public int Health;
     public ScoreManager sm;
-    public EffectManager effectManager;
+    //public EffectManager effectManager;
     public DataController dataController;
     public GameManager gameManager;
     private bool coinAdded;
@@ -27,10 +27,8 @@ public class Item2 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(Health<=0){
-            //destroy this gameObject
-            Destroy(gameObject);
+            StartCoroutine("ie_AddScoreAndKill",1);
         }
-		
 	}
 
     private int getMaxHealthByNumberOfScore(int modulo){
@@ -43,22 +41,22 @@ public class Item2 : MonoBehaviour {
         }
 
         return itemHealth;
+    }
 
+    public IEnumerator ie_AddScoreAndKill(int addToScore){
+
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
+        Debug.Log("add1");
+        sm.AddScore(addToScore);
+        dataController.SubmitNewPlayerCoins(addToScore);
+        Health = 0;
 
     }
 
     public void TakeDamage(int Damage){
 
-        int curr_Health = Health;
+            Health = Health - Damage;
 
-        if(curr_Health<=0){
-            sm.AddScore(1);
-            dataController.SubmitNewPlayerCoins(1);
-            gameObject.SendMessage("decreaseHealth", Damage, SendMessageOptions.DontRequireReceiver);
-        }else{
-            
-            curr_Health = curr_Health - Damage;
-            Health = curr_Health;
-        }
     }
 }
