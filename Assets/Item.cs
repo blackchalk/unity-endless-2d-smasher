@@ -141,6 +141,11 @@ public class Item : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+    public void Bomb(){
+        bombSound.Play();
+        ScoreManager.MinusHeart(1);
+    }
+
     public void kill(){
         deathSound.Play();
         //StartCoroutine("doTransitionOfSprite1");

@@ -94,6 +94,10 @@ public class Weapon_Wood : Weapon {
             {
                 hit.collider.gameObject.GetComponent<Item>().kill();
             }
+            else if (hit.collider.gameObject.CompareTag("bomb") && !gameManager.isPaused)
+            {
+                hit.collider.gameObject.GetComponent<Item>().Bomb();
+            }
 
 
 			//isHit = false;
