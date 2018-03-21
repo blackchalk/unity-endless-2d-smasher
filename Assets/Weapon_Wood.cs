@@ -14,15 +14,17 @@ public class Weapon_Wood : Weapon {
 	//Audio Source for sound playback
 	private AudioSource SFX = null;
     private AudioSource coinSound;
-
+    private GameManager gameManager;
 	//Reference to all child sprite renderers for this weapon
 	private SpriteRenderer[] WeaponSprites = null;
+
 	//------------------------------------------------
 	void Start()
 	{
 		//Find sound object in scene
 		//GameObject SoundsObject = GameObject.FindGameObjectWithTag("sounds");
         coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		//If no sound object, then exit
 		//if (SoundsObject == null) return;
 
@@ -72,20 +74,21 @@ public class Weapon_Wood : Weapon {
 		//Test for ray collision
         RaycastHit2D hit = Physics2D.Raycast(R.origin, R.direction );
 
-        Debug.DrawRay(R.origin, R.direction * 12, Color.yellow);
+        //Debug.DrawRay(R.origin, R.direction * 12, Color.yellow);
 
 		if (hit.collider != null)
 		{
-			if (hit.collider.gameObject.CompareTag("normal"))
+            if (hit.collider.gameObject.CompareTag("normal") && !gameManager.isPaused)
 			{
                 //Play collection sound, if audio source is available
                 //if (SFX) { SFX.PlayOneShot(WeaponAudio, 1.0f); }
                 if(coinSound){
                     coinSound.Play();
                 }
-				Debug.Log("test" + hit.collider.gameObject.tag);
+
 				//Send damage message (deal damage to enemy)
-				hit.collider.gameObject.SendMessage("Damage", Damage, SendMessageOptions.DontRequireReceiver);
+                hit.collider.gameObject.SendMessage("TakeDamage", Damage, SendMessageOptions.DontRequireReceiver);
+
 			}
 
 			//isHit = false;

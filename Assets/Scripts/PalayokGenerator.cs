@@ -17,7 +17,7 @@ public class PalayokGenerator : MonoBehaviour {
     private float heightChange;
 
     public GameObject[] PalayokObjects;
-	private float[] palayokWidths;
+	public float[] palayokWidths;
     private int palayokSelector;
 
 	// Use this for initialization
@@ -56,7 +56,7 @@ public class PalayokGenerator : MonoBehaviour {
             newPowerUp.SetActive(true);
 
             // Adjust the gap's size. move the platform generator to end of platform.
-            transform.position = new Vector3(transform.position.x + (palayokWidths[palayokSelector] / 2), heightChange, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (palayokWidths[palayokSelector] / 1.8f), heightChange, transform.position.z);
         }
     }
 

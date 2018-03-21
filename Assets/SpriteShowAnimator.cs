@@ -47,7 +47,8 @@ public class SpriteShowAnimator : MonoBehaviour {
         //Set is playing
         IsPlaying = true;
         //Calculate delay time
-        float DelayTime = 1.0f/FPS;
+        //float DelayTime = 1.0f/FPS;
+        float DelayTime = 0.3f / FPS;
         //RUN ANIMATION AT LEAST ONCE
         do
         {
@@ -73,10 +74,15 @@ public class SpriteShowAnimator : MonoBehaviour {
 
         //Is playing false
         IsPlaying = false;
+
         //Send Sprite Animation stopped event to gameobject
         gameObject.SendMessage("SpriteAnimationStopped",
                                AnimID,
                                SendMessageOptions
                                .DontRequireReceiver);
+        foreach (SpriteRenderer SR in Sprites)
+        {
+            SR.enabled = false;
+        }
     }
 }

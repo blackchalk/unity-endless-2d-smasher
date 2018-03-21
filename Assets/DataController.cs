@@ -15,6 +15,7 @@ public class DataController : MonoBehaviour
     public int icePointLevel;
     public int invulnerablePointLevel;
     public int levelPointsMultiplier = 100;//100
+    public int IncreaseHealthEvery = 10;
 
     // Use this for initialization
     void Start()
@@ -81,7 +82,7 @@ public class DataController : MonoBehaviour
     }
     //submit
     public void SubmitNewPlayerCoins(int newCoins){
-        Debug.Log("add coins:" + newCoins);
+        //Debug.Log("add coins:" + newCoins);
         setupupPrefs();
         playerProgress.PlayerCoins += newCoins;
         SavePlayerCoins();
@@ -99,7 +100,7 @@ public class DataController : MonoBehaviour
 
     public void SubmitNewPlayerIce(int newCoins)
     {
-        Debug.Log("add coins:" + newCoins);
+        //Debug.Log("add coins:" + newCoins);
         setupupPrefs();
         playerProgress.PlayerIcePointPurchased += newCoins;
         SavePlayerIcePoints();
@@ -108,7 +109,7 @@ public class DataController : MonoBehaviour
 
     public void SubmitNewPlayerInvulnerable(int newCoins)
     {
-        Debug.Log("add coins:" + newCoins);
+        //Debug.Log("add coins:" + newCoins);
         setupupPrefs();
         playerProgress.PlayerInvunerablePointPurchased += newCoins;
         SavePlayerInvulnerablePoints();
@@ -126,28 +127,28 @@ public class DataController : MonoBehaviour
 
     public int GetPlayerCoins(){
         setupupPrefs();
-        Debug.Log("GetPlayerCoins: " + playerProgress.PlayerCoins);
+        //Debug.Log("GetPlayerCoins: " + playerProgress.PlayerCoins);
         return playerProgress.PlayerCoins;
     }
 
     public int GetPlayerDoublePoint()
     {
         setupupPrefs();
-        Debug.Log("GetPlayerDoublePoint: " + playerProgress.PlayerDoublePointPurchased);
+        //Debug.Log("GetPlayerDoublePoint: " + playerProgress.PlayerDoublePointPurchased);
         return playerProgress.PlayerDoublePointPurchased;
     }
 
     public int GetPlayerIcePoint()
     {
         setupupPrefs();
-        Debug.Log("GetPlayerDoublePoint: " + playerProgress.PlayerIcePointPurchased);
+        //Debug.Log("GetPlayerDoublePoint: " + playerProgress.PlayerIcePointPurchased);
         return playerProgress.PlayerIcePointPurchased;
     }
 
     public int GetPlayerInvulnerablePoint()
     {
         setupupPrefs();
-        Debug.Log("GetPlayerInvulnerablePoint: " + playerProgress.PlayerInvunerablePointPurchased);
+        //Debug.Log("GetPlayerInvulnerablePoint: " + playerProgress.PlayerInvunerablePointPurchased);
         return playerProgress.PlayerInvunerablePointPurchased;
     }
     //get set
