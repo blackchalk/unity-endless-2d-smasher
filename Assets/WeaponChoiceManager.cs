@@ -25,7 +25,7 @@ public GameObject prevBtn;
 	// Update is called once per frame
 	void Update()
 	{
-		if (x == 4)
+        if (x == spr.Length-1)
 		{
 			nextBtn.SetActive(false);
 		}
