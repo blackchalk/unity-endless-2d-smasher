@@ -13,6 +13,7 @@ public class EffectManager : MonoBehaviour
     public float currentSpeedAtIce;
     public int duration = 0;
     public int itemScore = 0;
+    public int potHealthLevel = 1;
     public string itemType;
 	//
 	public Text scoreText;

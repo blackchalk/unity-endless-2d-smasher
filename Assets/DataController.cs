@@ -16,7 +16,6 @@ public class DataController : MonoBehaviour
     public int invulnerablePointLevel;
     public int levelPointsMultiplier = 100;//100
     public int IncreaseHealthEvery = 10;
-    public int potHealthLevel = 1;
 
     // Use this for initialization
     void Start()
@@ -24,10 +23,6 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         setupupPrefs();
 
-    }
-
-    public void increasepotHealthLevel(){
-        potHealthLevel += 1;
     }
 
     private void setupupPrefs()
