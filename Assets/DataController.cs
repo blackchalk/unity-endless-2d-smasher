@@ -14,8 +14,7 @@ public class DataController : MonoBehaviour
     public int doublePointLevel;
     public int icePointLevel;
     public int invulnerablePointLevel;
-    public int levelPointsMultiplier = 100;//100
-    public int IncreaseHealthEvery = 10;
+    //public int levelPointsMultiplier = 100;//100
 
     // Use this for initialization
     void Start()
