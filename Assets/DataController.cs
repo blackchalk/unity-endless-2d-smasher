@@ -16,6 +16,7 @@ public class DataController : MonoBehaviour
     public int invulnerablePointLevel;
     public int levelPointsMultiplier = 100;//100
     public int IncreaseHealthEvery = 10;
+    public int potHealthLevel = 1;
 
     // Use this for initialization
     void Start()
@@ -23,6 +24,10 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         setupupPrefs();
 
+    }
+
+    public void increasepotHealthLevel(){
+        potHealthLevel += 1;
     }
 
     private void setupupPrefs()
@@ -57,14 +62,14 @@ public class DataController : MonoBehaviour
     {
 
         PlayerPrefs.SetInt("PlayerCoins",playerProgress.PlayerCoins);
-        Debug.Log("Saved coins."+playerProgress.PlayerCoins);
+        //Debug.Log("Saved coins."+playerProgress.PlayerCoins);
     }
 
     private void SavePlayerDoublePoints()
     {
 
         PlayerPrefs.SetInt("DoublePointDuration", playerProgress.PlayerDoublePointPurchased);
-        Debug.Log("Saved DoublePointDuration." + playerProgress.PlayerDoublePointPurchased);
+        //Debug.Log("Saved DoublePointDuration." + playerProgress.PlayerDoublePointPurchased);
     }
 
     private void SavePlayerIcePoints()

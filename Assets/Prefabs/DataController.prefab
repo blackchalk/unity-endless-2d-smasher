@@ -70,3 +70,5 @@ MonoBehaviour:
   icePointLevel: 0
   invulnerablePointLevel: 0
   levelPointsMultiplier: 100
+  IncreaseHealthEvery: 10
+  potHealthLevel: 1

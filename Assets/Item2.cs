@@ -21,7 +21,8 @@ public class Item2 : MonoBehaviour {
     void Start () {
         coinAdded = false;
 
-        Health = getMaxHealthByNumberOfScore(dataController.IncreaseHealthEvery);
+        //Health = getMaxHealthByNumberOfScore(dataController.IncreaseHealthEvery);
+        Health = dataController.potHealthLevel;
 	}
 	
 	// Update is called once per frame
@@ -31,17 +32,17 @@ public class Item2 : MonoBehaviour {
         }
 	}
 
-    private int getMaxHealthByNumberOfScore(int modulo){
-        float currentScore = sm.scoreCounts;
+    //private int getMaxHealthByNumberOfScore(int modulo){
+    //    float currentScore = sm.scoreCounts;
 
-        int itemHealth = 1;
-        int mod = (int)currentScore % modulo;
-        if(mod==0){
-            itemHealth += Health;
-        }
-
-        return itemHealth;
-    }
+    //    int itemHealth = 1;
+    //    int mod = (int)currentScore % modulo;
+    //    if(mod==0){
+    //        itemHealth = itemHealth + 1;
+    //    }
+    //    Debug.Log("modulo is e: " + mod);
+    //    return itemHealth;
+    //}
 
     public IEnumerator ie_AddScoreAndKill(int addToScore){
 

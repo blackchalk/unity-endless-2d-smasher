@@ -13,10 +13,10 @@ public class ScoreManager : MonoBehaviour {
     public bool coinDoublePoints;
     public AudioSource deathSound;
     private GameManager gameManager;
-
+    private DataController dc;
     // Use this for initialization
     void Start() {
-        
+        dc = GameObject.Find("DataController").GetComponent<DataController>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		HeartCount = 3;
         if (PlayerPrefs.HasKey("HighScores")) {
@@ -69,6 +69,11 @@ public class ScoreManager : MonoBehaviour {
     public void AddScore(int point) {
         scoreCounts += coinDoublePoints ? point * 2 : point;
         gameScoreCounts += coinDoublePoints ? point * 2 : point;
+
+        if(((int)scoreCounts%10)==0){
+            dc.potHealthLevel += 1;
+        }
+
     }
 
 	public static void MinusHeart(int toBeDeducted)
