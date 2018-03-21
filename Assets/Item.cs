@@ -141,6 +141,12 @@ public class Item : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+    public void kill(){
+        deathSound.Play();
+        //StartCoroutine("doTransitionOfSprite1");
+        gameManager.RestartGame();
+    }
+
 	IEnumerator doTransitionOfSprite1()
 	{
         childspriteRenderer.enabled = true;

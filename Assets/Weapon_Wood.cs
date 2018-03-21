@@ -90,10 +90,15 @@ public class Weapon_Wood : Weapon {
                 hit.collider.gameObject.SendMessage("TakeDamage", Damage, SendMessageOptions.DontRequireReceiver);
                 hit.collider.gameObject.SendMessage("decreaseHealth", Damage, SendMessageOptions.DontRequireReceiver);
 			}
+            else if (hit.collider.gameObject.CompareTag("KillBox") && !gameManager.isPaused)
+            {
+                hit.collider.gameObject.GetComponent<Item>().kill();
+            }
 
 
 			//isHit = false;
 			//Destroy(GameObject.Find(hit.collider.gameObject.name));
+            Debug.Log("hit"+hit.collider.gameObject.tag);
 		}
 
 		 
