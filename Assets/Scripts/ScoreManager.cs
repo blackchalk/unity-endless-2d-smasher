@@ -40,7 +40,7 @@ public class ScoreManager : MonoBehaviour {
         }
 		
         scoreText.text = "Coins: " + Mathf.Round(scoreCounts);
-        //highScoreText.text = "High Score: " + Mathf.Round(highScoreCounts);
+        highScoreText.text = "High Score: " + Mathf.Round(highScoreCounts);
         gameScore.text = ""+Mathf.Round(gameScoreCounts);
 
         if(HeartCount == 3){
