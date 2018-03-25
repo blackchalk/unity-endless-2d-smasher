@@ -8,7 +8,8 @@ public class ScoreManager : MonoBehaviour {
     public static int HeartCount;
     public GameObject Heart3, Heart2, Heart1, Heart0;
     public Text scoreText, highScoreText,gameScore;
-    public float scoreCounts, highScoreCounts, pointPerSecond,gameScoreCounts;
+    public static Text heartCounterText;
+    public float scoreCounts, highScoreCounts, pointPerSecond, gameScoreCounts;
     //public bool scoreIncreasing;
     public bool coinDoublePoints;
     public AudioSource deathSound;
@@ -23,6 +24,10 @@ public class ScoreManager : MonoBehaviour {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 		HeartCount = 3;
+        heartCounterText = GameObject.Find("heartCounter").GetComponent<Text>();
+        //heartCounterText.GetComponent<Text>().enabled = false;
+        heartCounterText.GetComponent<Text>().text = "";
+
         if (PlayerPrefs.HasKey("HighScores")) {
             highScoreCounts = PlayerPrefs.GetFloat("HighScores");
         }
@@ -30,9 +35,19 @@ public class ScoreManager : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
-        //if (scoreIncreasing) {
-        //    scoreCounts += pointPerSecond * Time.deltaTime;
-        //}
+		//if (scoreIncreasing) {
+		//    scoreCounts += pointPerSecond * Time.deltaTime;
+		//}
+        //extra heart indicator
+		if ((heartCounterText != null) && (HeartCount > 3))
+		{
+			//heartCounterText.GetComponent<Text>().enabled = true;
+			heartCounterText.GetComponent<Text>().text = "x" + HeartCount;
+		}
+		else
+		{
+			heartCounterText.GetComponent<Text>().text = "";
+		}
 
         if (scoreCounts > highScoreCounts) {
             highScoreCounts = scoreCounts;
@@ -83,11 +98,24 @@ public class ScoreManager : MonoBehaviour {
 	public static void MinusHeart(int toBeDeducted)
 	{
         HeartCount -= toBeDeducted;
+		//if ((heartCounterText != null) && (HeartCount <= 3))
+		//{
+  //          heartCounterText.GetComponent<Text>().text = ""+HeartCount;
+  //          heartCounterText.GetComponent<Text>().enabled = false;
+
+		//}
 
 	}
 	public static void AddHeart(int toBeAdded)
 	{
 		HeartCount += toBeAdded;
+        //if((heartCounterText != null) && (HeartCount > 3))
+        //{
+        //    //heartCounterText.GetComponent<Text>().enabled = true;
+        //    heartCounterText.GetComponent<Text>().text = "x"+HeartCount;
+        //}else{
+        //    heartCounterText.GetComponent<Text>().text = "";
+        //}
 
 	}
 

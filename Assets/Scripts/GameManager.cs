@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public Transform platformGenerator;
     public bool isPaused = false;
     private Vector3 platformGeneratorStartPoint;
+    public GameObject pauseButton;
 
     public PlayerController playerController;
     private Vector3 playerStartPoint;
@@ -33,10 +34,13 @@ public class GameManager : MonoBehaviour {
         //scoreManager.scoreIncreasing = false;
         playerController.gameObject.SetActive(false);
         deathMenu.gameObject.SetActive(true);
+
+        pauseButton.SetActive(false);
     }
 
     public void ResetGame() {
         isPaused = false;
+        pauseButton.SetActive(true);
         powerUpManager.InActivePowerUpMode();
         deathMenu.gameObject.SetActive(false);
         objectDestroyers = FindObjectsOfType<ObjectDestroyer>();
@@ -51,14 +55,5 @@ public class GameManager : MonoBehaviour {
         scoreManager.scoreCounts = 0;
         //scoreManager.scoreIncreasing = true;
     }
-
-    //private IEnumerator submit(){
-
-    //    //submit collected coins
-    //    int x = (int)scoreManager.scoreCounts;
-    //    dataController.SubmitNewPlayerCoins(x);
-
-    //    yield return new WaitForSeconds(0.1f);
-    //}
 
 }

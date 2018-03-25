@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon_Hammer : Weapon {
-
 	//------------------------------------------------
 	//Default Sprite to show for weapon when active and not attacking
 	public SpriteRenderer DefaultSprite = null;
@@ -13,16 +12,18 @@ public class Weapon_Hammer : Weapon {
 
 	//Audio Source for sound playback
 	private AudioSource SFX = null;
-    private AudioSource coinSound;
-
+	private AudioSource coinSound;
+	private GameManager gameManager;
 	//Reference to all child sprite renderers for this weapon
 	private SpriteRenderer[] WeaponSprites = null;
+
 	//------------------------------------------------
 	void Start()
 	{
 		//Find sound object in scene
 		//GameObject SoundsObject = GameObject.FindGameObjectWithTag("sounds");
-        coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
+		coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		//If no sound object, then exit
 		//if (SoundsObject == null) return;
 
@@ -45,8 +46,11 @@ public class Weapon_Hammer : Weapon {
 		//If cannot accept input, then exit
 		//if (!GameManager.Instance.InputAllowed) return;
 
+		//Get ray from screen center target
+		//Ray R = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 1.7f, 0));
+
 		//Check for fire button input
-        if (Input.GetMouseButtonDown(0) && CanFire)
+		if (Input.GetMouseButtonDown(0) && CanFire && !gameManager.isPaused)
 			StartCoroutine(Fire());
 	}
 	//------------------------------------------------
@@ -67,29 +71,70 @@ public class Weapon_Hammer : Weapon {
 		//Get ray from screen center target
 		Ray R = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 1.7f, 0));
 		//Test for ray collision
-        RaycastHit2D hit = Physics2D.Raycast(R.origin, R.direction );
+		RaycastHit2D hit = Physics2D.Raycast(R.origin, R.direction);
 
-        Debug.DrawRay(R.origin, R.direction * 12, Color.yellow);
+		//Debug.DrawRay(R.origin, R.direction * 12, Color.yellow);
 
 		if (hit.collider != null)
 		{
 			if (hit.collider.gameObject.CompareTag("normal"))
 			{
-                //Play collection sound, if audio source is available
-                //if (SFX) { SFX.PlayOneShot(WeaponAudio, 1.0f); }
-                if(coinSound){
-                    coinSound.Play();
-                }
-				Debug.Log("test" + hit.collider.gameObject.tag);
+				//Play collection sound, if audio source is available
+				//if (SFX) { SFX.PlayOneShot(WeaponAudio, 1.0f); }
+				if (coinSound)
+				{
+					coinSound.Play();
+				}
+
 				//Send damage message (deal damage to enemy)
-				hit.collider.gameObject.SendMessage("Damage", Damage, SendMessageOptions.DontRequireReceiver);
+				hit.collider.gameObject.SendMessage("TakeDamage", Damage, SendMessageOptions.DontRequireReceiver);
+				hit.collider.gameObject.SendMessage("decreaseHealth", Damage, SendMessageOptions.DontRequireReceiver);
+			}
+			if (hit.collider.gameObject.CompareTag("KillBox"))
+			{
+				hit.collider.gameObject.GetComponent<Item>().kill();
+				Destroy(hit.collider.gameObject);
+			}
+			if (hit.collider.gameObject.CompareTag("bomb"))
+			{
+				hit.collider.gameObject.GetComponent<Item>().Bomb();
+				Destroy(hit.collider.gameObject);
+			}
+			if (hit.collider.gameObject.CompareTag("life"))
+			{
+				hit.collider.gameObject.GetComponent<Item>().life();
+				Destroy(hit.collider.gameObject);
+			}
+			if (hit.collider.gameObject.CompareTag("beehive"))
+			{
+				hit.collider.gameObject.GetComponent<Item>().beehive();
+				Destroy(hit.collider.gameObject);
+			}
+			if (hit.collider.gameObject.CompareTag("2x"))
+			{
+				//send message
+				hit.collider.gameObject.SendMessage("DoublePointMessage", null, SendMessageOptions.DontRequireReceiver);
+				Destroy(hit.collider.gameObject);
+			}
+			if (hit.collider.gameObject.CompareTag("ice"))
+			{
+				//send message
+				hit.collider.gameObject.SendMessage("IcePointMessage", null, SendMessageOptions.DontRequireReceiver);
+				Destroy(hit.collider.gameObject);
+			}
+			if (hit.collider.gameObject.CompareTag("star"))
+			{
+				//send message
+				hit.collider.gameObject.SendMessage("StarPointMessage", null, SendMessageOptions.DontRequireReceiver);
+				Destroy(hit.collider.gameObject);
 			}
 
 			//isHit = false;
 			//Destroy(GameObject.Find(hit.collider.gameObject.name));
+			//Debug.Log("hit"+hit.collider.gameObject.tag);
 		}
 
-		 
+
 
 		//Wait for recovery before re-enabling CanFire
 		yield return new WaitForSeconds(RecoveryDelay);

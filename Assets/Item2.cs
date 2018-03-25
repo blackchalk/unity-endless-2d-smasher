@@ -38,9 +38,12 @@ public class Item2 : MonoBehaviour {
 
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
-        Debug.Log("add1");
-        sm.AddScore(addToScore);
-        dataController.SubmitNewPlayerCoins(addToScore);
+        //Randomize items with coins
+        if (Random.Range(0, 50) > 30)
+        {
+            sm.AddScore(addToScore);
+            dataController.SubmitNewPlayerCoins(addToScore);
+        }
         Health = 0;
 
     }

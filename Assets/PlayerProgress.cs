@@ -8,4 +8,5 @@ public class PlayerProgress {
     public int PlayerDoublePointPurchased;
     public int PlayerIcePointPurchased;
     public int PlayerInvunerablePointPurchased;
+    public int PlayerWeaponChosen;
 }

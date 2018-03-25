@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_Wood : Weapon {
+public class Weapon_Bat : Weapon {
 
 	//------------------------------------------------
 	//Default Sprite to show for weapon when active and not attacking
@@ -15,16 +15,14 @@ public class Weapon_Wood : Weapon {
 	private AudioSource SFX = null;
     private AudioSource coinSound;
     private GameManager gameManager;
-    private EffectManager em;
 	//Reference to all child sprite renderers for this weapon
 	private SpriteRenderer[] WeaponSprites = null;
 
 	//------------------------------------------------
 	void Start()
 	{
-        //Find sound object in scene
-        //GameObject SoundsObject = GameObject.FindGameObjectWithTag("sounds");
-        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+		//Find sound object in scene
+		//GameObject SoundsObject = GameObject.FindGameObjectWithTag("sounds");
         coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		//If no sound object, then exit
@@ -92,12 +90,12 @@ public class Weapon_Wood : Weapon {
                 hit.collider.gameObject.SendMessage("TakeDamage", Damage, SendMessageOptions.DontRequireReceiver);
                 hit.collider.gameObject.SendMessage("decreaseHealth", Damage, SendMessageOptions.DontRequireReceiver);
 			}
-            if (hit.collider.gameObject.CompareTag("KillBox") && !em.starMode)
+            if (hit.collider.gameObject.CompareTag("KillBox"))
             {
                 hit.collider.gameObject.GetComponent<Item>().kill();
                 Destroy(hit.collider.gameObject);
             }
-            if (hit.collider.gameObject.CompareTag("bomb")&& !em.starMode)
+            if (hit.collider.gameObject.CompareTag("bomb"))
             {
                 hit.collider.gameObject.GetComponent<Item>().Bomb();
                 Destroy(hit.collider.gameObject);
@@ -107,7 +105,7 @@ public class Weapon_Wood : Weapon {
                 hit.collider.gameObject.GetComponent<Item>().life();
                 Destroy(hit.collider.gameObject);
 			}
-            if (hit.collider.gameObject.CompareTag("beehive")&& !em.starMode)
+			if (hit.collider.gameObject.CompareTag("beehive"))
 			{
 				hit.collider.gameObject.GetComponent<Item>().beehive();
                 Destroy(hit.collider.gameObject);

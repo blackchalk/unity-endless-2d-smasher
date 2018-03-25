@@ -15,7 +15,7 @@ PlayerSettings:
   productName: PukpokPalayok
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -38,7 +38,19 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: fb684c4e87010463bb11a2738b3045e8, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: b9ec9f7c8af7a4c2a9cfb3d6d296aa6e, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: e9efa5cac1c914454935ae093b7d1ccb, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: 4fe3c02820ca54b51830cba30b8299db, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: efa3483b209a741e597e05cec79a7ec6, type: 3}
+    duration: 2
+  - logo: {fileID: 21300000, guid: 506777c5495e441b0a416fed7bd50547, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024

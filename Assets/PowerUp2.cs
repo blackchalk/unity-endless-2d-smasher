@@ -5,16 +5,16 @@ using UnityEngine;
 public class PowerUp2 : MonoBehaviour {
 
 	public bool doublePointMode;
-	public bool spikeProffMode;
-    public bool invulnerableMode;
+    public bool starMode;
     public bool iceMode;
 
-	public float powerUpLength;
+	public float powerUpLength = 1;
+    public float powerUpIceLength = 1;
+    public float powerUpStarLength = 1;
     private EffectManager powerUpManager;
 	private AudioSource powerUpSource;
     private PlayerController pc;
     private DataController dc;
-    public bool beenClicked = false;
 
     //public Sprite[] upgradablePowerups;
     public int powerUpSelector;
@@ -27,75 +27,72 @@ public class PowerUp2 : MonoBehaviour {
         dc = GameObject.Find("DataController").GetComponent<DataController>();
 		//int powerUpSelector = Random.Range(0, 3);
 		//GetComponent<SpriteRenderer>().sprite = upgradablePowerups[powerUpSelector];
-		if (gameObject.CompareTag("2x"))
-		{
-			powerUpSelector = 0;
-		}
-		else if (gameObject.CompareTag("ice"))
-		{
-			powerUpSelector = 1;
-		}
-		else if (gameObject.CompareTag("star"))
-		{
-			powerUpSelector = 2;
-		}
-		else
-		{
-			powerUpSelector = 3;
-		}
+
 
 	}
 
 	// Use this for initialization
 	void Start()
-	{
-		switch (powerUpSelector)
-		{
-			case 0:
-                powerUpLength = dc.GetPlayerDoublePoint();
-				doublePointMode = true;
-				break;
-			case 1:
-                //TODO
-				iceMode = true;
+    {
+        powerUpSelector = setpowerUpType(gameObject.tag);
+
+        switch (powerUpSelector)
+        {
+            case 0:
+                powerUpLength += dc.GetPlayerDoublePoint();
+                doublePointMode = true;
                 break;
-			case 2:
-				spikeProffMode = true;
-				break;
-			case 3:
-				invulnerableMode = true;
-				break;
-		}
+            case 1:
+                iceMode = true;
+                powerUpIceLength += dc.GetPlayerIcePoint();
+                break;
+            case 2:
+                starMode = true;
+                powerUpStarLength += dc.GetPlayerInvulnerablePoint();
+                break;
+            default: break;
+        }
+    }
+
+    private int setpowerUpType(string _tag)
+    {
+        int x = -1;
+
+        if (_tag.Equals("2x"))
+        {
+            x = 0;
+        }
+        else if (_tag.Equals("ice"))
+        { 
+            x = 1;
+        }
+		else if (_tag.Equals("star"))
+		{ 
+            x = 2;
+        }
+
+        return x;
+    }
+
+
+    //message
+    public void DoublePointMessage(){
+		powerUpSource.Play();
+        powerUpManager.ActivateDoublePoint(doublePointMode, powerUpLength);
+
 	}
-
-
-
-	public void OnMouseOver()
+    //message
+	public void IcePointMessage()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
+		powerUpSource.Play();
+        powerUpManager.ActivateIcePoint(iceMode, pc.moveSpeed, powerUpIceLength);
 
-			if (beenClicked)
-			{
-				return;
-			}
-			else
-			{
-
-				if (gameObject.tag == "2x")
-				{
-					powerUpSource.Play();
-					powerUpManager.ActivePowerUpMode(doublePointMode, iceMode, spikeProffMode, pc.moveSpeed, powerUpLength);
-				}
-				else if (gameObject.tag == "ice")
-				{
-					powerUpSource.Play();
-					powerUpManager.ActivePowerUpMode(doublePointMode, iceMode, spikeProffMode, pc.moveSpeed, powerUpLength);
-				}
-				beenClicked = true;
-			}
-
-		}
 	}
 
+	public void StarPointMessage()
+	{
+		powerUpSource.Play();
+        powerUpManager.ActivateStarPoint(starMode, powerUpStarLength);
+
+	}
 }

@@ -1,132 +1,132 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class PlatformGenerator : MonoBehaviour {
-    public Transform platformGenerationPoint;
-    private float platformWidth;
+//public class PlatformGenerator : MonoBehaviour {
+//    public Transform platformGenerationPoint;
+//    private float platformWidth;
 
-    private float distanceBetweenPlatform;
-    public float platformDistanceBetweenMin;
-    public float platformDistanceBetweenMax;
+//    private float distanceBetweenPlatform;
+//    public float platformDistanceBetweenMin;
+//    public float platformDistanceBetweenMax;
 
-    private int platformSelector;
-    private float[] platformWidths;
+//    private int platformSelector;
+//    private float[] platformWidths;
 
-    public ObjectPooler[] platformPools;
+//    public ObjectPooler[] platformPools;
 
-    private float minHeight;
-    public Transform maxHeightPoint;
-    private float maxHeight;
+//    private float minHeight;
+//    public Transform maxHeightPoint;
+//    private float maxHeight;
 
-    public float maxHeightChange;
-    private float heightChange;
+//    public float maxHeightChange;
+//    private float heightChange;
 
-    private DiamondsGenerator diamondsGenerator;
-    public float diamondsGenerateThreshold;
+//    private DiamondsGenerator diamondsGenerator;
+//    public float diamondsGenerateThreshold;
 
-    // Spike
-    public float spikeGenerateThreshold;
+//    // Spike
+//    public float spikeGenerateThreshold;
 
-    public ObjectPooler spikePooler;
+//    public ObjectPooler spikePooler;
 
-    public int powerUpHeight;
-    public float powerUpAppearThreshold;
-    public ObjectPooler powerUpPooler;
+//    public int powerUpHeight;
+//    public float powerUpAppearThreshold;
+//    public ObjectPooler powerUpPooler;
 
-    // Use this for initialization
-    void Start() {
-        platformWidths = new float[platformPools.Length];
-        for (int i = 0; i < platformPools.Length; i++) {
-            platformWidths[i] = platformPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
-        }
+//    // Use this for initialization
+//    void Start() {
+//        platformWidths = new float[platformPools.Length];
+//        for (int i = 0; i < platformPools.Length; i++) {
+//            platformWidths[i] = platformPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
+//        }
 
-        minHeight = transform.position.y; // same as PlatformGenerator's Height
-        maxHeight = maxHeightPoint.position.y;
+//        minHeight = transform.position.y; // same as PlatformGenerator's Height
+//        maxHeight = maxHeightPoint.position.y;
 
-        diamondsGenerator = FindObjectOfType<DiamondsGenerator>();
-    }
+//        diamondsGenerator = FindObjectOfType<DiamondsGenerator>();
+//    }
 
-    // Update is called once per frame
-    void Update() {
-        if (transform.position.x < platformGenerationPoint.position.x) {
-            platformSelector = Random.Range(0, platformPools.Length);
+//    // Update is called once per frame
+//    void Update() {
+//        if (transform.position.x < platformGenerationPoint.position.x) {
+//            platformSelector = Random.Range(0, platformPools.Length);
 
-            distanceBetweenPlatform = Random.Range(platformDistanceBetweenMin, platformDistanceBetweenMax);
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetweenPlatform, 
-                                             transform.position.y, 
-                                             transform.position.z);
+//            distanceBetweenPlatform = Random.Range(platformDistanceBetweenMin, platformDistanceBetweenMax);
+//            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetweenPlatform, 
+//                                             transform.position.y, 
+//                                             transform.position.z);
 
-            heightChange = transform.position.y + Random.Range(-maxHeightChange, maxHeightChange);
-            if (heightChange > maxHeight) {
-                heightChange = maxHeight;
-            } else if (heightChange < minHeight) {
-                heightChange = minHeight;
-            }
+//            heightChange = transform.position.y + Random.Range(-maxHeightChange, maxHeightChange);
+//            if (heightChange > maxHeight) {
+//                heightChange = maxHeight;
+//            } else if (heightChange < minHeight) {
+//                heightChange = minHeight;
+//            }
 
-            if (Random.Range(0f, 100f) < powerUpAppearThreshold) {
-                GameObject newPowerUp = powerUpPooler.GetPoolObject();
-                newPowerUp.transform.position = transform.position + new Vector3((platformWidths[platformSelector] / 2) + (distanceBetweenPlatform / 2), 
-                                                                                 Random.Range(powerUpHeight / 2, 
-                                                                                              powerUpHeight), 0f);
-                newPowerUp.transform.rotation = transform.rotation;
-                newPowerUp.SetActive(true);
-            }
+//            if (Random.Range(0f, 100f) < powerUpAppearThreshold) {
+//                GameObject newPowerUp = powerUpPooler.GetPoolObject();
+//                newPowerUp.transform.position = transform.position + new Vector3((platformWidths[platformSelector] / 2) + (distanceBetweenPlatform / 2), 
+//                                                                                 Random.Range(powerUpHeight / 2, 
+//                                                                                              powerUpHeight), 0f);
+//                newPowerUp.transform.rotation = transform.rotation;
+//                newPowerUp.SetActive(true);
+//            }
 
-            GameObject newPlatform = platformPools[platformSelector].GetPoolObject();
-            newPlatform.transform.position = transform.position;
-            newPlatform.transform.rotation = transform.rotation;
-			//StartCoroutine(resetbeenclickedWhenActiveAgain(newPlatform));//
-            newPlatform.SetActive(true);
+//            GameObject newPlatform = platformPools[platformSelector].GetPoolObject();
+//            newPlatform.transform.position = transform.position;
+//            newPlatform.transform.rotation = transform.rotation;
+//			//StartCoroutine(resetbeenclickedWhenActiveAgain(newPlatform));//
+//            newPlatform.SetActive(true);
 
-            if (Random.Range(0f, 100f) < diamondsGenerateThreshold) {
-                diamondsGenerator.SpawnDiamonds(new Vector3(transform.position.x,
-                                                            transform.position.y + 1f,
-                                                            transform.position.z));
-            }
+//            if (Random.Range(0f, 100f) < diamondsGenerateThreshold) {
+//                diamondsGenerator.SpawnDiamonds(new Vector3(transform.position.x,
+//                                                            transform.position.y + 1f,
+//                                                            transform.position.z));
+//            }
 
-            if (Random.Range(0f, 100f) < spikeGenerateThreshold) {
-                GameObject newSpike = spikePooler.GetPoolObject();
-                float currentPlatformWidth = platformWidths[platformSelector];
-                float newSpikeXPosition = Random.Range(((currentPlatformWidth / 2) * -1) + 1f, (currentPlatformWidth / 2) - 1f);
-                Vector3 newPosition = new Vector3(newSpikeXPosition, .5f, 0f);
-                newSpike.transform.position = transform.position + newPosition;
-                newSpike.transform.rotation = transform.rotation;
-                newSpike.SetActive(true);
-            }
+//            if (Random.Range(0f, 100f) < spikeGenerateThreshold) {
+//                GameObject newSpike = spikePooler.GetPoolObject();
+//                float currentPlatformWidth = platformWidths[platformSelector];
+//                float newSpikeXPosition = Random.Range(((currentPlatformWidth / 2) * -1) + 1f, (currentPlatformWidth / 2) - 1f);
+//                Vector3 newPosition = new Vector3(newSpikeXPosition, .5f, 0f);
+//                newSpike.transform.position = transform.position + newPosition;
+//                newSpike.transform.rotation = transform.rotation;
+//                newSpike.SetActive(true);
+//            }
 
-            // Adjust the gap's size. move the platform generator to end of platform.
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), heightChange, transform.position.z);
-        }
-    }
+//            // Adjust the gap's size. move the platform generator to end of platform.
+//            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), heightChange, transform.position.z);
+//        }
+//    }
 
-    private IEnumerator resetbeenclickedWhenActiveAgain(GameObject newPlatform){
-        List<Item>[] lt = new List<Item>[CountChildren(newPlatform.transform)];
-
-
-  //      if (newPlatform.GetComponentInChildren<Item>() != null)
-		//{
-			for (int i = 0; i < lt.Length; i++)
-			{
-				Item x = (Item)lt.GetValue(i);
-				x.beenClicked = false;
-
-			}
-		//}
-		Debug.Log("coroutinefalse");
-        yield return new WaitForSeconds(0.1f);
-    }
+//    private IEnumerator resetbeenclickedWhenActiveAgain(GameObject newPlatform){
+//        List<Item>[] lt = new List<Item>[CountChildren(newPlatform.transform)];
 
 
-    int CountChildren(Transform a)
-    {
-        int childCount = 0;
-        foreach (Transform b in a)
-        {
-            Debug.Log("Child: " + b);
-            childCount++;
-            childCount += CountChildren(b);
-        }
-        return childCount;
-    }
-}
+//  //      if (newPlatform.GetComponentInChildren<Item>() != null)
+//		//{
+//			for (int i = 0; i < lt.Length; i++)
+//			{
+//				Item x = (Item)lt.GetValue(i);
+//				x.beenClicked = false;
+
+//			}
+//		//}
+//		Debug.Log("coroutinefalse");
+//        yield return new WaitForSeconds(0.1f);
+//    }
+
+
+//    int CountChildren(Transform a)
+//    {
+//        int childCount = 0;
+//        foreach (Transform b in a)
+//        {
+//            Debug.Log("Child: " + b);
+//            childCount++;
+//            childCount += CountChildren(b);
+//        }
+//        return childCount;
+//    }
+//}

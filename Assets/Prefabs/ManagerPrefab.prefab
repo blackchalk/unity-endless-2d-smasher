@@ -57,4 +57,5 @@ MonoBehaviour:
   coinsAccumulated: 0
   coinText: {fileID: 0}
   coinAnimateText: {fileID: 0}
+  hsText: {fileID: 0}
   coinInsufficientFundsAnimation: {fileID: 0}

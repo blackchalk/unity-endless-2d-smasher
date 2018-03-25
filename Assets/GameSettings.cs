@@ -10,27 +10,42 @@ public class GameSettings : MonoBehaviour {
     public Slider starSlider;
 
     private float doublePointValue;
+	private float icePointValue;
+	private float starPointValue;
+
     private int currentDoublePointCoinValue;
     private int currentIceValue;
     private int currentStarValue;
-    private float icePointValue;
-    private float starPointValue;
 
     public int coinsAccumulated;
+
     public Text coinText;
     public Text coinAnimateText;
+    public Text hsText;
+    private float hScore;
     public Animator coinInsufficientFundsAnimation;
     private DataController dataController;
 
     private AudioSource audioSource;
     private AudioSource btnClick;
 
-	// Use this for initialization
-	void Start () {
-        audioSource = GameObject.Find("Music").GetComponent<AudioSource>();
-        btnClick = GameObject.Find("ButtonClick").GetComponent<AudioSource>();
-        audioSource.Play();
-        dataController = FindObjectOfType<DataController>();
+    void Awake()
+    {
+
+		audioSource = GameObject.Find("Music").GetComponent<AudioSource>();
+		btnClick = GameObject.Find("ButtonClick").GetComponent<AudioSource>();
+		audioSource.Play();
+		dataController = FindObjectOfType<DataController>();
+    }
+    // Use this for initialization
+    void Start () {
+
+		if (PlayerPrefs.HasKey("HighScores"))
+		{
+            hScore = PlayerPrefs.GetFloat("HighScores");
+            hsText.text = "Highscore: " + Mathf.Round(hScore); 
+		}
+
         if (PlayerPrefs.HasKey("PlayerCoins"))
         {
             setUpViewsForCoins();
@@ -47,14 +62,17 @@ public class GameSettings : MonoBehaviour {
         ////slow
         if (PlayerPrefs.HasKey("IcePointDuration"))
         {
+            iceSlider.value = dataController.GetPlayerIcePoint();
             setupIceValue();
         }
 
         ////invulnerable
         if (PlayerPrefs.HasKey("InvulnerablePointDuration"))
         {
-            coinText.text = dataController.GetPlayerCoins().ToString();
+            starSlider.value = dataController.GetPlayerInvulnerablePoint();
+            setupStarValue();
         }
+
         coinAnimateText.enabled = false;
         coinInsufficientFundsAnimation.enabled = false;
 
@@ -63,25 +81,6 @@ public class GameSettings : MonoBehaviour {
     public void setUpViewsForCoins(){
 		coinsAccumulated = dataController.GetPlayerCoins();
 		coinText.text = "Coins:" + coinsAccumulated;
-    }
-
-
-    //loads desired scene
-    public void LoadScene(string sceneNameInBuildSettings){
-        SceneManager.LoadScene(sceneNameInBuildSettings);
-    }
-    //hides gameobject
-    public void showOrHideGO(GameObject go){
-        if (go.activeSelf)
-            go.SetActive(false);
-
-        else
-            go.SetActive(true);
-    }
-    //pass the value to a accessible variable
-    private int getSliderValue(){
-        doublePointValue = doublePointSlider.value;
-        return (int)doublePointValue;
     }
 
     //pass the value to a accessible variable
@@ -106,7 +105,7 @@ public class GameSettings : MonoBehaviour {
 
         int nextLevelCoinValue = 0;
 
-        setupIceValue();
+        setupDoublePointValue();
 
         nextLevelCoinValue = currentDoublePointCoinValue + 200;
 
@@ -121,11 +120,11 @@ public class GameSettings : MonoBehaviour {
             setUpViewsForCoins();
 
         }else{
+            
             StartCoroutine("doTransitionOfSprite1",nextLevelCoinValue);
-            Debug.Log("insufficient funds.");
+            //Debug.Log("insufficient funds.");
         }
-        //if(coinInsufficientFundsAnimation.)
-        //coinInsufficientFundsAnimation.enabled = false;
+
     }
 
 
@@ -162,7 +161,7 @@ public class GameSettings : MonoBehaviour {
 
         int nextLevelCoinValue = 0;
 
-        setupIceValue();
+        setupStarValue();
 
         nextLevelCoinValue = currentStarValue + 200;
 
@@ -239,16 +238,6 @@ public class GameSettings : MonoBehaviour {
         }
     }
 
-    public void increaseIcePointDuration(float x)
-    {
-        iceSlider.value += x;
-    }
-
-    public void increaseStarPointDuration(float x)
-    {
-        starSlider.value += x;
-    }
-
 	//update prefs on button back pressed
 
 	IEnumerator doTransitionOfSprite1(int next)
@@ -263,6 +252,28 @@ public class GameSettings : MonoBehaviour {
         coinInsufficientFundsAnimation.enabled = false;
         StopCoroutine("doTransitionOfSprite1");
 		//Destroy(gameObject);
+	}
+
+
+	//loads desired scene
+	public void LoadScene(string sceneNameInBuildSettings)
+	{
+		SceneManager.LoadScene(sceneNameInBuildSettings);
+	}
+	//hides gameobject
+	public void showOrHideGO(GameObject go)
+	{
+		if (go.activeSelf)
+			go.SetActive(false);
+
+		else
+			go.SetActive(true);
+	}
+	//pass the value to a accessible variable
+	private int getSliderValue()
+	{
+		doublePointValue = doublePointSlider.value;
+		return (int)doublePointValue;
 	}
 
 }
