@@ -276,4 +276,6 @@ public class GameSettings : MonoBehaviour {
 		return (int)doublePointValue;
 	}
 
+
+
 }

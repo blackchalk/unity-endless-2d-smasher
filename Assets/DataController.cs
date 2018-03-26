@@ -53,7 +53,7 @@ public class DataController : MonoBehaviour
 
     void Start()
     {
-        //SubmitNewPlayerCoins(10000);
+        
         //selectedWeapon = GetPlayerEquippedWeapon();
             if (PlayerPrefs.HasKey("isWoodUnlocked"))
             {

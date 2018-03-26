@@ -91,6 +91,7 @@ public class ScoreManager : MonoBehaviour {
 
         if(((int)scoreCounts%10)==0){
             em.potHealthLevel += 1;
+            em.updatePotLevel();
         }
 
     }

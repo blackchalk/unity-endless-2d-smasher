@@ -25,7 +25,8 @@ public class EffectManager : MonoBehaviour
     public Text c_coins;
     public Text c_snow;
     public Text c_star;
-
+    //pot level text indicator
+    public Text c_potlevel;
     //bee
     public bool beeMode;
     public float beeModeTimeLength;
@@ -63,10 +64,14 @@ public class EffectManager : MonoBehaviour
         bee.SetActive(false);
 
 	}
+
+    public void updatePotLevel(){
+        c_potlevel.text = "Pot Level: " + potHealthLevel;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        
+        //updatePotLevel();
 		//check whether its paused
 		if (!gm.isPaused)
 		{
